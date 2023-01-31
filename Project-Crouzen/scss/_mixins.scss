@@ -1,3 +1,12 @@
+@mixin burgerBtn {
+	position: absolute;
+	right: 0;
+	height: 3px;
+	content: '';
+	background-color: black;
+	transition: width 0.3s;
+}
+
 @mixin heroImages($bgImg) {
 	background-image: url($bgImg);
 	background-size: cover;
