@@ -1,3 +1,5 @@
+@import './mixins';
+
 *,
 *::before,
 *::after {
@@ -9,7 +11,7 @@
 html {
 	font-size: 62.5%;
 	scroll-behavior: smooth;
-	height: 100vh;
+	height: 1300vh;
 }
 
 body {
@@ -19,20 +21,32 @@ body {
 
 // HEADER
 .header {
+	// @include heroImages('../img/273550816_4814761428599998_4708593817449654846_n.jpg');	
+
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	padding: 2em;
-	height: 50vh;
+	height: 100vh;
 	text-align: center;
-	background-attachment: scroll;
+	// background-attachment: scroll;
 	
 	&__heading {
 		position: absolute;
 		top: 15%;
-		font-size: 5rem;
+		left: 5%;
+		font-size: 8rem;
 		font-weight: 300;
+	}
+
+	&__img {
+		position: absolute;
+		right: 0%;
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		
 	}
 }
