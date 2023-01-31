@@ -14,5 +14,25 @@ html {
 
 body {
     font-size: 1.6rem;
-	color: red;
+	// color: red;
+}
+
+// HEADER
+.header {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 2em;
+	height: 50vh;
+	text-align: center;
+	background-attachment: scroll;
+	
+	&__heading {
+		position: absolute;
+		top: 15%;
+		font-size: 5rem;
+		font-weight: 300;
+	}
 }
