@@ -1,0 +1,18 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  height: 100vh;
+}
+
+body {
+  font-size: 1.6rem;
+  color: red;
+}/*# sourceMappingURL=main.css.map */
