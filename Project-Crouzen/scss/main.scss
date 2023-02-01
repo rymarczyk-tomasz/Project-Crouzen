@@ -100,7 +100,7 @@ body {
 		margin: 0.5em 0;
 		padding: 0.5em 2em;
 		font-size: 2.8rem;
-		color: black;
+		color: $red;
 		text-decoration: none;
 
 		&::before {
@@ -110,7 +110,7 @@ body {
 			width: 100%;
 			height: 100%;
 			transform: scale(0);
-			border: 3px solid black;
+			border: 3px solid $red;
 			border-radius: 8px;
 			content: '';
 			transition: transform 0.3s;
@@ -147,7 +147,8 @@ body {
 		font-family: 'Dancing Script', cursive;
 		font-size: 3rem;
 		font-weight: 300;
-	}}
+	}
+}
 
 	@keyframes navItemsAnimation {
 		from {
@@ -192,4 +193,5 @@ body {
 			a {
 				display: inline-block;
 			}
-		}}
+		}
+	}
