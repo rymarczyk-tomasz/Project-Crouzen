@@ -142,12 +142,20 @@ body {
 
 		&__heading {
 		position: absolute;
-		top: 15%;
+		top: 25%;
+		left: 100px;
 		color: black;
 		font-family: 'Dancing Script', cursive;
-		font-size: 3rem;
+		font-size: 8rem;
 		font-weight: 300;
-	}
+		}
+
+		&__img {
+			position: absolute;
+			top: 15%;
+			right: 15%;
+			width: 700px;
+		}
 }
 
 	@keyframes navItemsAnimation {
