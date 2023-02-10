@@ -159,27 +159,15 @@ body {
 }
 .header__heading {
   position: absolute;
-  top: 25%;
-  left: 100px;
+  top: 13%;
   color: black;
   font-family: "Dancing Script", cursive;
-  font-size: 8rem;
+  font-size: 3rem;
   font-weight: 300;
 }
 .header__img {
   position: absolute;
-  top: 15%;
-  right: 15%;
-  width: 700px;
-}
-
-@-webkit-keyframes navItemsAnimation {
-  from {
-    transform: translateX(200%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  width: 100%;
 }
 
 @keyframes navItemsAnimation {
