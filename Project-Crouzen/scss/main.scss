@@ -155,6 +155,15 @@ body {
 		}
 }
 
+.gallery {
+
+	&__box {
+		&--padding {
+			padding-top: 2em;
+		}
+	}
+}
+
 	@keyframes navItemsAnimation {
 		from {
 			transform: translateX(200%);

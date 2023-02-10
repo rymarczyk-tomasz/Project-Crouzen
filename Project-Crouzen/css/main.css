@@ -170,6 +170,10 @@ body {
   width: 100%;
 }
 
+.gallery__box--padding {
+  padding-top: 2em;
+}
+
 @keyframes navItemsAnimation {
   from {
     transform: translateX(200%);
