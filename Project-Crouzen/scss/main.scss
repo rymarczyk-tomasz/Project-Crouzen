@@ -208,4 +208,18 @@ body {
 				display: inline-block;
 			}
 		}
+
+		.header { 
+
+			&__heading {
+				top: 15%;
+				left:5%;
+				font-size: 4rem;
+			}
+			&__img {
+				top: 15%;
+				right: 5%;
+				width: 500px;
+			}
+		}
 	}

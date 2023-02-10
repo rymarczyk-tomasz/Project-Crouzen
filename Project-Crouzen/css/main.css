@@ -209,4 +209,14 @@ body {
   .nav-desktop a {
     display: inline-block;
   }
+  .header__heading {
+    top: 15%;
+    left: 5%;
+    font-size: 4rem;
+  }
+  .header__img {
+    top: 15%;
+    right: 5%;
+    width: 500px;
+  }
 }/*# sourceMappingURL=main.css.map */
