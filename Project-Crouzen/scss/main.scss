@@ -142,20 +142,26 @@ body {
 
 		&__heading {
 		position: absolute;
-		top: 25%;
-		left: 100px;
+		top: 13%;
 		color: black;
 		font-family: 'Dancing Script', cursive;
-		font-size: 8rem;
+		font-size: 3rem;
 		font-weight: 300;
 		}
 
 		&__img {
 			position: absolute;
-			top: 15%;
-			right: 15%;
-			width: 700px;
+			width: 100%;
 		}
+}
+
+.gallery {
+
+	&__box {
+		&--padding {
+			padding-top: 2em;
+		}
+	}
 }
 
 	@keyframes navItemsAnimation {
@@ -200,6 +206,20 @@ body {
 	
 			a {
 				display: inline-block;
+			}
+		}
+
+		.header { 
+
+			&__heading {
+				top: 15%;
+				left:5%;
+				font-size: 4rem;
+			}
+			&__img {
+				top: 15%;
+				right: 5%;
+				width: 500px;
 			}
 		}
 	}

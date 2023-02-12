@@ -159,18 +159,24 @@ body {
 }
 .header__heading {
   position: absolute;
-  top: 25%;
-  left: 100px;
+  top: 13%;
   color: black;
   font-family: "Dancing Script", cursive;
-  font-size: 8rem;
+  font-size: 3rem;
   font-weight: 300;
 }
 .header__img {
   position: absolute;
-  top: 15%;
-  right: 15%;
-  width: 700px;
+  width: 100%;
+}
+
+@-webkit-keyframes navItemsAnimation {
+  from {
+    transform: translateX(200%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes navItemsAnimation {
@@ -207,5 +213,15 @@ body {
   }
   .nav-desktop a {
     display: inline-block;
+  }
+  .header__heading {
+    top: 15%;
+    left: 5%;
+    font-size: 4rem;
+  }
+  .header__img {
+    top: 15%;
+    right: 5%;
+    width: 500px;
   }
 }/*# sourceMappingURL=main.css.map */
