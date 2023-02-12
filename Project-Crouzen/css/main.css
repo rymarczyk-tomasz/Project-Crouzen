@@ -173,15 +173,6 @@ body {
   width: 700px;
 }
 
-@-webkit-keyframes navItemsAnimation {
-  from {
-    transform: translateX(200%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
 @keyframes navItemsAnimation {
   from {
     transform: translateX(200%);
