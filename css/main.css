@@ -161,7 +161,7 @@ body {
   position: absolute;
   top: 13%;
   color: black;
-  font-family: "Dancing Script", cursive;
+  font-family: "Gloria Hallelujah", cursive;
   font-size: 3rem;
   font-weight: 300;
 }
@@ -182,6 +182,10 @@ body {
     transform: translateX(0);
   }
 }
+.nav-items-animation {
+  animation: navItemsAnimation 1s both;
+}
+
 @media (min-width: 992px) {
   .burger-btn {
     display: none;
