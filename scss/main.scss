@@ -155,11 +155,36 @@ body {
 	}
 }
 
+.bio {
+	&__box {
+		&--text {
+			text-align: center;
+		}
+	}
+}
+
 .exhibitions {
 	&__box {
 		&--padding {
 			padding-top: 2em;
 		}
+		&__list {
+			&--text {
+				text-align: center;
+			}
+		}
+	}
+}
+
+.gallery {
+	background-color: #f6f8f7;
+
+	&__image {
+		display: block;
+		margin: 0 auto;
+		width: 100%;
+		max-width: 300px;
+		max-height: 200px;
 	}
 }
 

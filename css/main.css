@@ -170,8 +170,26 @@ body {
   width: 100%;
 }
 
+.bio__box--text {
+  text-align: center;
+}
+
 .exhibitions__box--padding {
   padding-top: 2em;
+}
+.exhibitions__box__list--text {
+  text-align: center;
+}
+
+.gallery {
+  background-color: #f6f8f7;
+}
+.gallery__image {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+  max-height: 200px;
 }
 
 @keyframes navItemsAnimation {
