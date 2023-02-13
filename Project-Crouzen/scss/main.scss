@@ -155,12 +155,19 @@ body {
 		}
 }
 
-.gallery {
+.exhibition {
 
 	&__box {
 		&--padding {
 			padding-top: 2em;
 		}
+	}
+}
+
+.gallery {
+	&__carousel {
+		width: 200px;
+		height: 100px;
 	}
 }
 

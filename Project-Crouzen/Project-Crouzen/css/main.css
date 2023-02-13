@@ -170,8 +170,13 @@ body {
   width: 100%;
 }
 
-.gallery__box--padding {
+.exhibition__box--padding {
   padding-top: 2em;
+}
+
+.gallery__carousel {
+  width: 200px;
+  height: 100px;
 }
 
 @keyframes navItemsAnimation {
