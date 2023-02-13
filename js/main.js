@@ -20,3 +20,4 @@ const handleNavItemsAnimation = () => {
 }
 
 navBtn.addEventListener('click', handleNav)
+allNavItems.forEach(btn => btn.addEventListener('click', handleNav))
