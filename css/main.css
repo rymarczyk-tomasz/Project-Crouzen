@@ -7,7 +7,7 @@
 .section-heading {
   position: relative;
   font-family: "Petit Formal Script", cursive;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   color: #2e2e2e;
   font-size: 3rem;
   font-weight: 300;
@@ -170,7 +170,7 @@ body {
   width: 100%;
 }
 
-.gallery__box--padding {
+.exhibitions__box--padding {
   padding-top: 2em;
 }
 
