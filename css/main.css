@@ -8,7 +8,7 @@
   position: relative;
   font-family: "Petit Formal Script", cursive;
   margin-bottom: 2em;
-  color: black;
+  color: #2e2e2e;
   font-size: 3rem;
   font-weight: 300;
   text-align: center;
@@ -82,7 +82,7 @@ body {
   right: 0;
   height: 3px;
   content: "";
-  background-color: black;
+  background-color: #d62525;
   transition: width 0.3s;
 }
 .burger-btn__bars {
@@ -107,7 +107,7 @@ body {
   height: 100%;
   width: 100%;
   transform: translateX(100%);
-  background-image: linear-gradient(45deg, #090909, #2c2b2b);
+  background-image: linear-gradient(45deg, rgba(9, 9, 9, 0.7), rgba(44, 43, 43, 0.7));
   z-index: 100;
   transition: 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
@@ -160,7 +160,7 @@ body {
 .header__heading {
   position: absolute;
   top: 13%;
-  color: black;
+  color: #2e2e2e;
   font-family: "Gloria Hallelujah", cursive;
   font-size: 3rem;
   font-weight: 300;
