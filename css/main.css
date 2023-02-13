@@ -170,13 +170,8 @@ body {
   width: 100%;
 }
 
-@-webkit-keyframes navItemsAnimation {
-  from {
-    transform: translateX(200%);
-  }
-  to {
-    transform: translateX(0);
-  }
+.gallery__box--padding {
+  padding-top: 2em;
 }
 
 @keyframes navItemsAnimation {
