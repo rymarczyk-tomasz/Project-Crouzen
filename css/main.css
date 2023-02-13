@@ -16,7 +16,7 @@
 }
 
 .section-padding {
-  padding: 2.5em 2em;
+  padding: 1.5em 2em;
 }
 
 @media (min-width: 768px) {
@@ -107,7 +107,7 @@ body {
   height: 100%;
   width: 100%;
   transform: translateX(100%);
-  background-image: linear-gradient(45deg, rgba(9, 9, 9, 0.7), rgba(44, 43, 43, 0.7));
+  background-image: linear-gradient(45deg, rgba(9, 9, 9, 0.9), rgba(44, 43, 43, 0.9));
   z-index: 100;
   transition: 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
@@ -170,8 +170,26 @@ body {
   width: 100%;
 }
 
+.bio__box--text {
+  text-align: center;
+}
+
 .exhibitions__box--padding {
   padding-top: 2em;
+}
+.exhibitions__box__list--text {
+  text-align: center;
+}
+
+.gallery {
+  background-color: #f6f8f7;
+}
+.gallery__image {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+  max-height: 200px;
 }
 
 @keyframes navItemsAnimation {

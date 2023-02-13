@@ -6,16 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Theodor Buchholz</title>
+    <!-- <link rel="icon" type="image/x-icon" href="/images/favicon.ico"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Petit+Formal+Script&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/e9b3690385.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <header id="home" class="header section">
+    <header id="home" class="header">
         <h1 class="header__heading">Theodor Buchholz</h1>
         <img src="img/Korzen.jpg" alt="Theodor Buchholz" class="header__img">
     </header>
@@ -46,7 +48,7 @@
         </div>
     </nav>
 
-    <section id="bio" class="bio section-padding section">
+    <section id="bio" class="bio section-padding">
         <div class="wrapper">
             <div class="bio__box">
                 <h2 class="section-heading">Bio</h2>
@@ -61,7 +63,7 @@
         </div>
     </section>
 
-    <section id="exhibitions" class="exhibitions section-padding section">
+    <section id="exhibitions" class="exhibitions section-padding">
         <div class="wrapper">
             <div class="exhibitions__box"></div>
         </div>
@@ -87,18 +89,37 @@
         </div>
     </section>
 
-    <section id="gallery" class="gallery section-padding section">
+    <section id="gallery" class="gallery section-padding">
+        <h2 class="section-heading">
+            Galeria
+        </h2>
         <div class="wrapper">
-            <div class="gallery__box"></div>
+            <div class="gallery__carousel">
+                <div class="gallery__box">
+                    <img class="gallery__image" src="img/IMG_1.jpg" alt="coś">
+                </div>
+                <div class="gallery__box">
+                    <img class="gallery__image" src="img/IMG_2.jpg" alt="coś">
+                </div>
+                <div class="gallery__box">
+                    <img class="gallery__image" src="img/IMG_3.jpg" alt="coś">
+                </div>
+                <div class="gallery__box">
+                    <img class="gallery__image" src="img/IMG_4.jpg" alt="coś">
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="contact section-padding section">
+    <section id="contact" class="contact section-padding">
         <div class="wrapper">
             <div class="contact__box"></div>
         </div>
     </section>
-
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/slickjs.js"></script>
     <script src="js/main.js"></script>
 </body>
 
