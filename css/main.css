@@ -170,6 +170,9 @@ body {
   width: 100%;
 }
 
+.bio {
+  transform: translateX(-100%);
+}
 .bio__box--text {
   text-align: center;
 }
@@ -190,6 +193,11 @@ body {
   width: 100%;
   max-width: 300px;
   max-height: 200px;
+}
+
+.active {
+  transform: translateX(0);
+  transition: 1s;
 }
 
 @keyframes navItemsAnimation {
