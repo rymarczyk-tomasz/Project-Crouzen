@@ -20,6 +20,7 @@ html {
 
 body {
 	font-size: 1.6rem;
+	overflow-x: hidden;
 }
 
 // NAV
@@ -87,7 +88,7 @@ body {
 	z-index: 100;
 	transition: 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
 
-	&--disable {
+	&--active {
 		transform: translateX(0);
 	}
 
@@ -156,6 +157,7 @@ body {
 }
 
 .bio {
+	background-color: #f6f8f7;
 	transform: translateX(-100%);
 	&__box {
 		&--text {
@@ -165,6 +167,7 @@ body {
 }
 
 .exhibitions {
+	transform: translateX(100%);
 	&__box {
 		&--padding {
 			padding-top: 2em;
@@ -175,10 +178,12 @@ body {
 			}
 		}
 	}
+
 }
 
 .gallery {
 	background-color: #f6f8f7;
+	transform: scale(0);
 
 	&__image {
 		display: block;
@@ -191,7 +196,8 @@ body {
 
 .active {
 	transform: translateX(0);
-	transition: 1s;
+	transform: scale(1);
+	transition: transform 1s;
 }
 
 @keyframes navItemsAnimation {

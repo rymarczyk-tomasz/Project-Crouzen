@@ -51,6 +51,7 @@ html {
 
 body {
   font-size: 1.6rem;
+  overflow-x: hidden;
 }
 
 .burger-btn {
@@ -111,7 +112,7 @@ body {
   z-index: 100;
   transition: 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
-.nav--disable {
+.nav--active {
   transform: translateX(0);
 }
 .nav__item {
@@ -171,12 +172,16 @@ body {
 }
 
 .bio {
+  background-color: #f6f8f7;
   transform: translateX(-100%);
 }
 .bio__box--text {
   text-align: center;
 }
 
+.exhibitions {
+  transform: translateX(100%);
+}
 .exhibitions__box--padding {
   padding-top: 2em;
 }
@@ -186,6 +191,7 @@ body {
 
 .gallery {
   background-color: #f6f8f7;
+  transform: scale(0);
 }
 .gallery__image {
   display: block;
@@ -197,7 +203,8 @@ body {
 
 .active {
   transform: translateX(0);
-  transition: 1s;
+  transform: scale(1);
+  transition: transform 1s;
 }
 
 @keyframes navItemsAnimation {
