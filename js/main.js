@@ -31,16 +31,10 @@ window.addEventListener('scroll', function() {
   const currentSection = visibleSections[visibleSections.length - 1];
 
   if (isScrollingDown() && currentSection) {
-    // Użytkownik przewija w dół i istnieje następna sekcja
+
 	currentSection.classList.add('active')
-    // const nextSection = currentSection.nextElementSibling;
-    // Wykonaj akcję dla następnej sekcji
+
   }
-//    else if (!isScrollingDown() && currentSection.previousElementSibling) {
-//     // Użytkownik przewija w górę i istnieje poprzednia sekcja
-//     const previousSection = currentSection.previousElementSibling;
-//     // Wykonaj akcję dla poprzedniej sekcji
-//   }
 
   previousScrollY = window.scrollY;
 });
