@@ -126,9 +126,6 @@ body {
 // HEADER
 
 .header {
-	&--disable {
-		display: none;
-	}
 
 	position: relative;
 	display: flex;
@@ -156,6 +153,8 @@ body {
 	}
 }
 
+// BIO
+
 .bio {
 	background-color: #f6f8f7;
 	transform: translateX(-100%);
@@ -165,6 +164,8 @@ body {
 		}
 	}
 }
+
+//EXHIBITIONS
 
 .exhibitions {
 	transform: translateX(100%);
@@ -181,6 +182,8 @@ body {
 
 }
 
+//GALLERY
+
 .gallery {
 	background-color: #f6f8f7;
 	transform: scale(0);
@@ -193,6 +196,8 @@ body {
 		max-height: 200px;
 	}
 }
+
+//CONTACT
 
 .active {
 	transform: translateX(0);
@@ -258,6 +263,14 @@ body {
 			top: 15%;
 			right: 5%;
 			width: 500px;
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.nav {
+		&__item {
+			font-size: 3.4rem;
 		}
 	}
 }

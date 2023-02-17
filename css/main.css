@@ -155,9 +155,6 @@ body {
   color: #f6f8f7;
   background-attachment: scroll;
 }
-.header--disable {
-  display: none;
-}
 .header__heading {
   position: absolute;
   top: 13%;
@@ -255,5 +252,10 @@ body {
     top: 15%;
     right: 5%;
     width: 500px;
+  }
+}
+@media (min-width: 1200px) {
+  .nav__item {
+    font-size: 3.4rem;
   }
 }/*# sourceMappingURL=main.css.map */
