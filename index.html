@@ -17,36 +17,29 @@
 </head>
 
 <body>
+    <nav class="navbar">
+        <div class="navbar-wrapper wrapper">
+            <input type="checkbox" name="" id="">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+            <ul class="menu-items">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#bio">Bio</a></li>
+                <li><a href="#food">Wystawy</a></li>
+                <li><a href="#food-menu">Galeria</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <h1 class="logo">TB</h1>
+        </div>
+    </nav>
+
     <header id="home" class="header">
         <h1 class="header__heading">Theodor Buchholz</h1>
         <img src="img/Korzen.jpg" alt="Theodor Buchholz" class="header__img">
     </header>
-
-    <button class="burger-btn">
-        <div class="burger-btn__box">
-            <div class="burger-btn__bars"></div>
-        </div>
-    </button>
-
-    <nav class="nav nav-mobile">
-        <div class="nav__items">
-            <a href="#home" class="nav__item">Home</a>
-            <a href="#bio" class="nav__item">Bio</a>
-            <a href="#exhibitions" class="nav__item ">Wystawy</a>
-            <a href="#gallery" class="nav__item ">Galeria</a>
-            <a href="#contact" class="nav__item ">Kontakt</a>
-        </div>
-    </nav>
-
-    <nav class="nav nav-desktop">
-        <div class="nav__items">
-            <a href="#home" class="nav__item ">Home</a>
-            <a href="#bio" class="nav__item ">Bio</a>
-            <a href="#exhibitions" class="nav__item ">Wystawy</a>
-            <a href="#gallery" class="nav__item ">Galeria</a>
-            <a href="#contact" class="nav__item ">Kontakt</a>
-        </div>
-    </nav>
 
     <section id="bio" class="bio section-padding section">
         <div class="wrapper">
@@ -113,9 +106,12 @@
             <div class="contact__box"></div>
         </div>
     </section>
+
+    
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/slickjs.js"></script>
     <script src="js/main.js"></script>
 </body>
