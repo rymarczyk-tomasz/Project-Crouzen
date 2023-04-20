@@ -1,7 +1,3 @@
-// const nav = document.querySelector('.nav')
-// const navBtn = document.querySelector('.burger-btn')
-// const allNavItems = document.querySelectorAll('.nav__item')
-// const navBtnBars = document.querySelector('.burger-btn__bars')
 
 
 function isScrollingDown() {
@@ -39,24 +35,6 @@ window.addEventListener('scroll', function() {
   previousScrollY = window.scrollY;
 });
 
-// const handleNav = () => {
-// 	nav.classList.toggle('nav--active')
-
-// 	handleNavItemsAnimation()
-// }
-
-// const handleNavItemsAnimation = () => {
-// 	let delayTime = 0
-
-// 	allNavItems.forEach(item => {
-// 		item.classList.toggle('nav-items-animation')
-// 		item.style.animationDelay = '.' + delayTime + 's'
-// 		delayTime++
-// 	})
-// }
-
-// navBtn.addEventListener('click', handleNav)
-// allNavItems.forEach(btn => btn.addEventListener('click', handleNav))
 $(document).ready(function () {
 	// Add smooth scrolling to all links
 	$("a").on("click", function (event) {
