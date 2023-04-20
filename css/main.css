@@ -167,7 +167,7 @@ body {
 }
 
 .exhibitions {
-  transform: translateX(100%);
+  transform: translateX(-100%);
 }
 .exhibitions__box--padding {
   padding-top: 2em;
