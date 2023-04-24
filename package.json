@@ -1,0 +1,19 @@
+{
+  "name": "project-crouzen",
+  "version": "1.0.0",
+  "description": "Portfolio Crouzen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rymarczyk-tomasz/Project-Crouzen.git"
+  },
+  "author": "Tomasz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rymarczyk-tomasz/Project-Crouzen/issues"
+  },
+  "homepage": "https://github.com/rymarczyk-tomasz/Project-Crouzen#readme"
+}
