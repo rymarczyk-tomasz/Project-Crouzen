@@ -35,7 +35,7 @@ body {
   /* desktop mode............/// */
 
 .navbar input[type='checkbox'],
-.navbar .hamburger-lines {
+.navbar .hamburger__lines {
 	display: none;
 }
 
@@ -215,7 +215,7 @@ body {
 
 @media (max-width: 768px) {
 	.navbar-wrapper input[type='checkbox'],
-	.navbar-wrapper .hamburger-lines {
+	.navbar-wrapper .hamburger__lines {
 		display: block;
 	}
 	.navbar {
@@ -302,15 +302,15 @@ body {
 		transform: translateX(0);
 	}
 
-	.navbar-wrapper input[type='checkbox']:checked ~ .hamburger-lines .line1 {
+	.navbar-wrapper input[type='checkbox']:checked ~ .hamburger__lines .line1 {
 		transform: rotate(35deg);
 	}
 
-	.navbar-wrapper input[type='checkbox']:checked ~ .hamburger-lines .line2 {
+	.navbar-wrapper input[type='checkbox']:checked ~ .hamburger__lines .line2 {
 		transform: scaleY(0);
 	}
 
-	.navbar-wrapper input[type='checkbox']:checked ~ .hamburger-lines .line3 {
+	.navbar-wrapper input[type='checkbox']:checked ~ .hamburger__lines .line3 {
 		transform: rotate(-35deg);
 	}
 }
