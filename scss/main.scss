@@ -165,10 +165,6 @@ body {
 	position: relative;
 	z-index: 0;
 
-	// h2 {
-	// 	font-weight: bold;
-	// }
-
 	.contact__box {
 		display: flex;
 		align-items: center;
@@ -180,11 +176,13 @@ body {
 
 			a {
 				display: block;
+				text-decoration: none;
 				padding: 10px;
 				color: black;
 			}
 
 			a:hover {
+				transition: .3s;
 				color: grey;
 			}
 		}

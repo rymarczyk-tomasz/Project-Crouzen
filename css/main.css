@@ -178,10 +178,12 @@ body {
 }
 .contact .contact__box .social-media a {
   display: block;
+  text-decoration: none;
   padding: 10px;
   color: black;
 }
 .contact .contact__box .social-media a:hover {
+  transition: 0.3s;
   color: grey;
 }
 
