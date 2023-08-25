@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/rymarczyk-tomasz/Project-Crouzen/issues"
   },
-  "homepage": "https://github.com/rymarczyk-tomasz/Project-Crouzen#readme"
+  "homepage": "https://github.com/rymarczyk-tomasz/Project-Crouzen#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.1"
+  }
 }
