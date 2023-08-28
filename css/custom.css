@@ -12013,6 +12013,50 @@ textarea.form-control-lg {
   padding: 0;
 }
 
-html {
-  height: 150vh;
+body {
+  height: 200vh;
+}
+
+nav {
+  text-transform: uppercase;
+}
+nav .navbar-brand {
+  font-weight: bold;
+}
+nav .nav-link,
+nav .navbar-nav,
+nav .navbar-nav .nav-link.show,
+nav .navbar-brand {
+  color: #000;
+}
+nav .nav-link:focus,
+nav .nav-link:hover,
+nav .navbar-nav .nav-link.active,
+nav .navbar-nav .show > .nav-link,
+nav .navbar-brand:hover,
+nav .navbar-brand:focus {
+  color: #dc8f31;
+}
+
+header {
+  position: relative;
+  height: 45vh;
+}
+header .header-img-left,
+header .header-img-right {
+  height: 100px;
+}
+header .header-img-hero {
+  position: absolute;
+  height: 200px;
+  top: 30%;
+  left: 30%;
+}
+
+.about-me p {
+  padding: 50px;
+}
+
+.exhibition {
+  height: 75vh;
 }/*# sourceMappingURL=custom.css.map */
