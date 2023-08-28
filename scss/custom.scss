@@ -1,22 +1,19 @@
-// Functions first
-@import "../node_modules/bootstrap/scss/functions";
-
-// Variable overrides second
+// Variable overrides first
 $primary: #900;
 $enable-shadows: true;
 $prefix: "mo-";
 
-// Required Bootstrap imports
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/variables-dark";
-@import "../node_modules/bootstrap/scss/maps";
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/root";
+// Then import Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
 
-// Optional components
-@import "../node_modules/bootstrap/scss/utilities";
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/containers";
-@import "../node_modules/bootstrap/scss/grid";
-@import "../node_modules/bootstrap/scss/helpers";
-@import "../node_modules/bootstrap/scss/utilities/api";
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+    height: 150vh;
+}
