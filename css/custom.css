@@ -12013,12 +12013,14 @@ textarea.form-control-lg {
   padding: 0;
 }
 
-body {
-  height: 200vh;
+.section-title {
+  text-align: center;
+  text-transform: uppercase;
 }
 
 nav {
   text-transform: uppercase;
+  font-weight: bold;
 }
 nav .navbar-brand {
   font-weight: bold;
@@ -12042,21 +12044,31 @@ header {
   position: relative;
   height: 45vh;
 }
-header .header-img-left,
-header .header-img-right {
-  height: 100px;
-}
-header .header-img-hero {
-  position: absolute;
+header .header-img {
   height: 200px;
-  top: 30%;
-  left: 30%;
+  width: 250px;
+}
+header .first {
+  position: absolute;
+  left: 5%;
+  top: 20%;
+}
+header .second {
+  position: absolute;
+  top: 40%;
+  left: -5%;
+}
+header .third {
+  position: absolute;
+  right: 5%;
+  top: 20%;
+}
+header .fourth {
+  position: absolute;
+  top: 40%;
+  right: -5%;
 }
 
 .aboutme p {
   padding: 50px;
-}
-
-.exhibition {
-  height: 75vh;
 }/*# sourceMappingURL=custom.css.map */

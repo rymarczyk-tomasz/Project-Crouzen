@@ -16,8 +16,13 @@ $prefix: 'mo-';
 	padding: 0;
 }
 
-body {
-	height: 200vh;
+// body {
+// 	height: 200vh;
+// }
+
+.section-title {
+	text-align: center;
+	text-transform: uppercase;
 }
 
 nav {
@@ -25,6 +30,7 @@ nav {
 		font-weight: bold;
 	}
 	text-transform: uppercase;
+	font-weight: bold;
 
 	.nav-link,
 	.navbar-nav,
@@ -46,18 +52,29 @@ nav {
 header {
 	position: relative;
 	height: 45vh;
-	.header-img-left,
-	.header-img-right {
-		height: 100px;
-	}
-
-	.header-img-hero {
-		position: absolute;
+	.header-img {
 		height: 200px;
-		top: 30%;
-		// bottom: 50%;
-		left: 30%;
-		// right: 50%;
+		width: 250px;
+	}
+	.first {
+		position: absolute;
+		left: 5%;
+		top: 20%;
+	}
+	.second {
+		position: absolute;
+		top: 40%;
+		left: -5%;
+	}
+	.third {
+		position: absolute;
+		right: 5%;
+		top: 20%;
+	}
+	.fourth {
+		position: absolute;
+		top: 40%;
+		right: -5%;
 	}
 }
 
@@ -67,6 +84,6 @@ header {
 	}
 }
 
-.exhibition {
-	height: 75vh;
-}
+// .exhibition {
+// 	height: 75vh;
+// }
