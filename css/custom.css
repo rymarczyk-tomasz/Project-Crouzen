@@ -12071,4 +12071,42 @@ header .fourth {
 
 .aboutme p {
   padding: 50px;
+}
+
+@media (max-width: 768px) {
+  header .header-img {
+    display: none;
+  }
+}
+@media (max-width: 992px) {
+  header .header-img {
+    height: 100px;
+    width: 150px;
+  }
+  header .first {
+    left: 0%;
+  }
+  header .second {
+    top: 30%;
+    left: -10%;
+  }
+  header .third {
+    right: 0%;
+  }
+  header .fourth {
+    top: 30%;
+    right: -10%;
+  }
+}
+@media (max-width: 1200px) {
+  header .header-img {
+    height: 150px;
+    width: 200px;
+  }
+  header .second {
+    top: 35%;
+  }
+  header .fourth {
+    top: 35%;
+  }
 }/*# sourceMappingURL=custom.css.map */
