@@ -16,6 +16,10 @@ $prefix: 'mo-';
 	padding: 0;
 }
 
+html {
+	scroll-padding-top: 56px;
+}
+
 // body {
 // 	height: 200vh;
 // }
@@ -84,9 +88,32 @@ header {
 	}
 }
 
+.card-img-top {
+	max-height: 300px;
+}
+
 // .exhibition {
-// 	height: 75vh;
+// 	// .card-group {
+// 	// 	.card {
+// 	// 		padding: 10px 0 10 px 0;
+// 	// 	}
+
+// 	// 	.card-body {
+// 	// 		position: relative;
+// 	// 		min-height: 150px;
+// 	// 		.btn-primary {
+				
+// 	// 		}
+// 	// 	}
+// 	// }
 // }
+
+.gallery {
+	.gallery-img {
+		height: 200px;
+		width: 250px;
+	}
+}
 
 @media (max-width: 768px) {
 	header {
@@ -96,6 +123,9 @@ header {
 	}
 }
 @media (max-width: 992px) {
+	html {
+		scroll-padding-top: 52px;
+	}
 	header {
 		.header-img {
 			height: 100px;

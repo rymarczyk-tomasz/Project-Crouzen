@@ -12013,6 +12013,10 @@ textarea.form-control-lg {
   padding: 0;
 }
 
+html {
+  scroll-padding-top: 56px;
+}
+
 .section-title {
   text-align: center;
   text-transform: uppercase;
@@ -12073,12 +12077,24 @@ header .fourth {
   padding: 50px;
 }
 
+.card-img-top {
+  max-height: 300px;
+}
+
+.gallery .gallery-img {
+  height: 200px;
+  width: 250px;
+}
+
 @media (max-width: 768px) {
   header .header-img {
     display: none;
   }
 }
 @media (max-width: 992px) {
+  html {
+    scroll-padding-top: 52px;
+  }
   header .header-img {
     height: 100px;
     width: 150px;
