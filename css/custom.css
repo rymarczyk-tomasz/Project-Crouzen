@@ -12046,31 +12046,10 @@ nav .navbar-brand:focus {
 
 header {
   position: relative;
-  height: 45vh;
+  height: 20vh;
 }
 header .header-img {
-  height: 200px;
-  width: 250px;
-}
-header .first {
-  position: absolute;
-  left: 5%;
-  top: 20%;
-}
-header .second {
-  position: absolute;
-  top: 40%;
-  left: -5%;
-}
-header .third {
-  position: absolute;
-  right: 5%;
-  top: 20%;
-}
-header .fourth {
-  position: absolute;
-  top: 40%;
-  right: -5%;
+  display: none;
 }
 
 .aboutme p {
@@ -12086,43 +12065,111 @@ header .fourth {
   width: 250px;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 576px) {
+  header {
+    height: 25vh;
+  }
   header .header-img {
-    display: none;
+    display: block;
+    height: 70px;
+    width: 120px;
+  }
+  header .header-img .first {
+    position: absolute;
+    top: 25%;
+    left: 2%;
+  }
+  header .header-img .second {
+    position: absolute;
+    top: 35%;
+    left: -3%;
+  }
+  header .header-img .third {
+    position: absolute;
+    top: 25%;
+    right: 2%;
+  }
+  header .header-img .fourth {
+    position: absolute;
+    top: 35%;
+    right: -3%;
   }
 }
-@media (max-width: 992px) {
-  html {
-    scroll-padding-top: 52px;
+@media (min-width: 768px) {
+  header {
+    height: 30vh;
   }
   header .header-img {
     height: 100px;
     width: 150px;
   }
-  header .first {
+  header .header-img .first {
+    top: 23%;
+    left: 8%;
+  }
+  header .header-img .second {
+    top: 38%;
     left: 0%;
   }
-  header .second {
-    top: 30%;
-    left: -10%;
+  header .header-img .third {
+    top: 23%;
+    right: 8%;
   }
-  header .third {
+  header .header-img .fourth {
+    top: 38%;
     right: 0%;
   }
-  header .fourth {
-    top: 30%;
-    right: -10%;
-  }
 }
-@media (max-width: 1200px) {
+@media (min-width: 992px) {
+  html {
+    scroll-padding-top: 52px;
+  }
+  header {
+    height: 35vh;
+  }
   header .header-img {
     height: 150px;
     width: 200px;
   }
-  header .second {
-    top: 35%;
+  header .header-img .first {
+    left: 10%;
+    top: 20%;
   }
-  header .fourth {
-    top: 35%;
+  header .header-img .second {
+    top: 40%;
+    left: 0%;
+  }
+  header .header-img .third {
+    right: 10%;
+    top: 20%;
+  }
+  header .header-img .fourth {
+    top: 40%;
+    right: 0%;
+  }
+}
+@media (min-width: 1200px) {
+  header {
+    height: 40vh;
+  }
+  header .header-img {
+    height: 200px;
+    width: 250px;
+  }
+  header .header-img .first {
+    left: 10%;
+    top: 20%;
+  }
+  header .header-img .second {
+    top: 40%;
+    left: 0%;
+  }
+  header .header-img .third {
+    right: 10%;
+    top: 20%;
+  }
+  header .header-img .fourth {
+    top: 40%;
+    right: 0%;
   }
 }/*# sourceMappingURL=custom.css.map */

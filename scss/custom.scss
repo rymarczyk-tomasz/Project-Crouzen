@@ -55,30 +55,9 @@ nav {
 
 header {
 	position: relative;
-	height: 45vh;
+	height: 20vh;
 	.header-img {
-		height: 200px;
-		width: 250px;
-	}
-	.first {
-		position: absolute;
-		left: 5%;
-		top: 20%;
-	}
-	.second {
-		position: absolute;
-		top: 40%;
-		left: -5%;
-	}
-	.third {
-		position: absolute;
-		right: 5%;
-		top: 20%;
-	}
-	.fourth {
-		position: absolute;
-		top: 40%;
-		right: -5%;
+		display: none;
 	}
 }
 
@@ -102,7 +81,7 @@ header {
 // 	// 		position: relative;
 // 	// 		min-height: 150px;
 // 	// 		.btn-primary {
-				
+
 // 	// 		}
 // 	// 	}
 // 	// }
@@ -115,49 +94,112 @@ header {
 	}
 }
 
-@media (max-width: 768px) {
+@media (min-width: 576px) {
 	header {
+		height: 25vh;
 		.header-img {
-			display: none;
+			display: block;
+			height: 70px;
+			width: 120px;
+			.first {
+				position: absolute;
+				top: 25%;
+				left: 2%;
+			}
+			.second {
+				position: absolute;
+				top: 35%;
+				left: -3%;
+			}
+			.third {
+				position: absolute;
+				top: 25%;
+				right: 2%;
+			}
+			.fourth {
+				position: absolute;
+				top: 35%;
+				right: -3%;
+			}
 		}
 	}
 }
-@media (max-width: 992px) {
+
+@media (min-width: 768px) {
+	header {
+		height: 30vh;
+		.header-img {
+			height: 100px;
+			width: 150px;
+			.first {
+				top: 23%;
+				left: 8%;
+			}
+			.second {
+				top: 38%;
+				left: 0%;
+			}
+			.third {
+				top: 23%;
+				right: 8%;
+			}
+			.fourth {
+				top: 38%;
+				right: 0%;
+			}
+		}
+	}
+}
+@media (min-width: 992px) {
 	html {
 		scroll-padding-top: 52px;
 	}
 	header {
-		.header-img {
-			height: 100px;
-			width: 150px;
-		}
-		.first {
-			left: 0%;
-		}
-		.second {
-			top: 30%;
-			left: -10%;
-		}
-		.third {
-			right: 0%;
-		}
-		.fourth {
-			top: 30%;
-			right: -10%;
-		}
-	}
-}
-@media (max-width: 1200px) {
-	header {
+		height: 35vh;
 		.header-img {
 			height: 150px;
 			width: 200px;
+			.first {
+				left: 10%;
+				top: 20%;
+			}
+			.second {
+				top: 40%;
+				left: 0%;
+			}
+			.third {
+				right: 10%;
+				top: 20%;
+			}
+			.fourth {
+				top: 40%;
+				right: 0%;
+			}
 		}
-		.second {
-			top: 35%;
-		}
-		.fourth {
-			top: 35%;
+	}
+}
+@media (min-width: 1200px) {
+	header {
+		height: 40vh;
+		.header-img {
+			height: 200px;
+			width: 250px;
+			.first {
+				left: 10%;
+				top: 20%;
+			}
+			.second {
+				top: 40%;
+				left: 0%;
+			}
+			.third {
+				right: 10%;
+				top: 20%;
+			}
+			.fourth {
+				top: 40%;
+				right: 0%;
+			}
 		}
 	}
 }
