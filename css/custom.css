@@ -12056,8 +12056,12 @@ header .header-img {
   padding: 50px;
 }
 
+.card-link {
+  text-decoration: none;
+}
+
 .card-img-top {
-  max-height: 300px;
+  height: 300px;
 }
 
 .gallery .gallery-img {
@@ -12121,9 +12125,6 @@ header .header-img {
   }
 }
 @media (min-width: 992px) {
-  html {
-    scroll-padding-top: 52px;
-  }
   header {
     height: 35vh;
   }

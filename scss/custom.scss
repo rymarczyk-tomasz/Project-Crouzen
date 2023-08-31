@@ -67,25 +67,13 @@ header {
 	}
 }
 
-.card-img-top {
-	max-height: 300px;
+.card-link {
+	text-decoration: none;
 }
 
-// .exhibition {
-// 	// .card-group {
-// 	// 	.card {
-// 	// 		padding: 10px 0 10 px 0;
-// 	// 	}
-
-// 	// 	.card-body {
-// 	// 		position: relative;
-// 	// 		min-height: 150px;
-// 	// 		.btn-primary {
-
-// 	// 		}
-// 	// 	}
-// 	// }
-// }
+.card-img-top {
+	height: 300px;
+}
 
 .gallery {
 	.gallery-img {
@@ -151,9 +139,6 @@ header {
 	}
 }
 @media (min-width: 992px) {
-	html {
-		scroll-padding-top: 52px;
-	}
 	header {
 		height: 35vh;
 		.header-img {
