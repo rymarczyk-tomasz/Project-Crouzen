@@ -113,6 +113,17 @@ header {
 	}
 }
 
+.contact {
+	.bi {
+		cursor: pointer;
+		transition: color .3s;
+	}
+
+	.bi:hover {
+		color: #900;
+	}
+}
+
 @media (min-width: 768px) {
 	header {
 		height: 30vh;

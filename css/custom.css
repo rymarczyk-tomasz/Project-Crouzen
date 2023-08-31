@@ -12099,6 +12099,14 @@ header .header-img {
     right: -3%;
   }
 }
+.contact .bi {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.contact .bi:hover {
+  color: #900;
+}
+
 @media (min-width: 768px) {
   header {
     height: 30vh;
