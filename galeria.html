@@ -16,36 +16,43 @@
     <body>
         <!-- NAV -->
         <nav>
+            <div class="inner">
             <a href="index.html" class="nav-name">Theodor Bucholz</a>
             <ul class="nav-links">
                 <li><a href="galeria.html" class="nav-active">Galeria</a></li>
                 <li><a href="index.html#o-artyscie">O artyście</a></li>
                 <li><a href="index.html#kontakt">Kontakt</a></li>
             </ul>
+            </div>
         </nav>
 
         <!-- PAGE HEADER -->
         <div class="page-header">
+            <div class="inner">
             <p class="hero-eyebrow">Portfolio · Malarstwo</p>
             <h1 class="page-title">Galeria <em>prac</em></h1>
             <p class="page-desc">
                 Wszystkie prace — różne techniki, różne światy. Kliknij obraz,
                 aby zobaczyć go w pełnym rozmiarze.
             </p>
+            </div>
         </div>
 
         <!-- FILTERS -->
         <div class="filter-bar">
+            <div class="inner" style="display:flex;gap:8px;flex-wrap:wrap;">
             <button class="filter-btn active" data-filter="all">Wszystkie</button>
             <button class="filter-btn" data-filter="olej">Olej</button>
             <button class="filter-btn" data-filter="akwarela">Akwarela</button>
             <button class="filter-btn" data-filter="akryl">Akryl</button>
             <button class="filter-btn" data-filter="pastel">Pastel</button>
             <button class="filter-btn" data-filter="mieszana">Mieszana</button>
+            </div>
         </div>
 
         <!-- GALLERY GRID -->
-        <main class="full-gallery" id="gallery-container">
+        <div class="full-gallery-wrap">
+        <main class="full-gallery inner" id="gallery-container">
 
             <div class="fg-item" data-category="olej"
                  onclick="openLightbox('Pejzaż jesienny','Olej na płótnie · 60 × 80 cm · 2023','img/IMG_1.jpg')">
@@ -213,6 +220,7 @@
             </div>
 
         </main>
+        </div>
 
         <!-- EMPTY STATE -->
         <p class="gallery-empty hidden" id="gallery-empty">
@@ -221,8 +229,10 @@
 
         <!-- FOOTER -->
         <footer>
+            <div class="inner">
             <span>© <span id="footer-year"></span> Theodor Bucholz</span>
             <a href="index.html">← Wróć na stronę główną</a>
+            </div>
         </footer>
 
         <!-- LIGHTBOX -->

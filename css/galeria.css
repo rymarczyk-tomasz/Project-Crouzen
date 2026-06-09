@@ -199,3 +199,43 @@
         transition: none;
     }
 }
+
+/* ── MAX WIDTH ── */
+.page-header .container,
+.filter-bar .container,
+.full-gallery.container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* ── INNER for galeria page ── */
+.page-header {
+    padding-left: 48px;
+    padding-right: 48px;
+}
+.filter-bar {
+    padding-left: 48px;
+    padding-right: 48px;
+}
+/* Full-gallery wrap keeps bg, inner constrains columns */
+.full-gallery-wrap {
+    background: var(--white);
+}
+.full-gallery.inner {
+    padding: 40px 48px 80px;
+    margin: 0 auto;
+}
+/* override the old standalone .full-gallery padding since wrap handles bg */
+.full-gallery {
+    background: transparent;
+}
+
+@media (max-width: 900px) {
+    .page-header { padding-left: 24px; padding-right: 24px; }
+    .filter-bar { padding-left: 24px; padding-right: 24px; }
+    .full-gallery.inner { padding: 28px 24px 60px; }
+}
+@media (max-width: 600px) {
+    .full-gallery.inner { padding: 20px 16px 48px; }
+    .filter-bar { padding-left: 16px; padding-right: 16px; }
+}
