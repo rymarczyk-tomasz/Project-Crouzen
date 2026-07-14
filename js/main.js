@@ -245,7 +245,12 @@ const ArtSite = (function () {
         const img = document.getElementById("lightbox-img");
         const lens = getLightboxLens();
 
-        if (!img || !lens || lightboxState.zoom <= 1 || img.style.display !== "block") {
+        if (
+            !img ||
+            !lens ||
+            lightboxState.zoom <= 1 ||
+            img.style.display !== "block"
+        ) {
             hideLightboxLens();
             return;
         }
