@@ -340,40 +340,6 @@ section {
     justify-content: center;
 }
 
-.card-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-}
-
-.open-art-btn,
-.ask-btn {
-    font-family: "Inter", sans-serif;
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 7px 12px;
-    border: 1px solid rgba(122, 92, 62, 0.45);
-    background: transparent;
-    color: #5f462f;
-    cursor: pointer;
-    transition:
-        color 0.18s,
-        border-color 0.18s,
-        background 0.18s;
-}
-
-.open-art-btn:hover,
-.ask-btn:hover {
-    border-color: var(--umber);
-    color: var(--umber);
-    background: rgba(122, 92, 62, 0.08);
-}
-
 /* ── ABOUT ── */
 #o-artyscie {
     background: var(--cream);
@@ -602,7 +568,24 @@ footer a {
     max-height: 85vh;
     object-fit: contain;
     border: 1px solid rgba(201, 184, 154, 0.1);
-    transition: transform 0.2s ease;
+}
+.lightbox-lens {
+    position: fixed;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 2px solid rgba(201, 184, 154, 0.9);
+    box-shadow:
+        0 0 0 2px rgba(30, 22, 18, 0.65),
+        0 12px 26px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+    z-index: 1002;
+    display: none;
+    background-repeat: no-repeat;
+    background-color: #1e1612;
+}
+.lightbox-lens.active.visible {
+    display: block;
 }
 .lightbox-placeholder {
     width: 600px;
@@ -630,10 +613,14 @@ footer a {
 .lightbox-close:hover {
     color: var(--parch);
 }
-.lightbox-zoom {
+.lightbox-lens-controls {
     position: fixed;
     top: 28px;
     left: 36px;
+    display: flex;
+    gap: 8px;
+}
+.lightbox-lens-btn {
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -644,11 +631,11 @@ footer a {
     font-family: "Inter", sans-serif;
     padding: 8px 12px;
 }
-.lightbox-zoom:hover {
+.lightbox-lens-btn:hover {
     color: var(--parch);
     border-color: rgba(201, 184, 154, 0.75);
 }
-.lightbox-zoom:disabled {
+.lightbox-lens-btn:disabled {
     opacity: 0.35;
     cursor: not-allowed;
 }
@@ -743,9 +730,13 @@ footer a {
     .lightbox-next {
         right: 14px;
     }
-    .lightbox-zoom {
+    .lightbox-lens-controls {
         top: 20px;
         left: 14px;
+    }
+    .lightbox-lens {
+        width: 140px;
+        height: 140px;
     }
 }
 @media (max-width: 600px) {

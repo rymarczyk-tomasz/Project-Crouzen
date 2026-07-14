@@ -15,7 +15,27 @@ const ArtSite = (function () {
         sequence: [],
         currentIndex: -1,
         zoom: 1,
+        lensSize: 180,
     };
+
+    function getLightboxLens() {
+        let lens = document.getElementById("lightbox-lens");
+        if (lens) {
+            return lens;
+        }
+
+        const lightbox = document.getElementById("lightbox");
+        if (!lightbox) {
+            return null;
+        }
+
+        lens = document.createElement("div");
+        lens.id = "lightbox-lens";
+        lens.className = "lightbox-lens";
+        lens.setAttribute("aria-hidden", "true");
+        lightbox.appendChild(lens);
+        return lens;
+    }
 
     async function getArtworks() {
         if (artworksCache) {
@@ -101,20 +121,7 @@ const ArtSite = (function () {
         textWrap.appendChild(name);
         textWrap.appendChild(meta);
 
-        const actions = document.createElement("div");
-        actions.className = "card-actions";
-
-        const askLink = document.createElement("a");
-        askLink.className = "ask-btn";
-        askLink.href =
-            "index.html?art=" + encodeURIComponent(artwork.title) + "#kontakt";
-        askLink.textContent = "Zapytaj o obraz";
-        askLink.setAttribute("aria-label", "Zapytaj o obraz: " + artwork.title);
-
-        actions.appendChild(askLink);
-
         caption.appendChild(textWrap);
-        caption.appendChild(actions);
 
         article.appendChild(frame);
         article.appendChild(caption);
@@ -148,8 +155,9 @@ const ArtSite = (function () {
 
         lb.classList.add("open");
         document.body.style.overflow = "hidden";
-        setLightboxZoom(1);
-        updateZoomButtonState(Boolean(src));
+        setLightboxLensSize(lightboxState.lensSize);
+        setLightboxZoom(src ? 2 : 1);
+        updateLensButtonsState(Boolean(src));
         updateLightboxNavButtons();
     }
 
@@ -164,39 +172,111 @@ const ArtSite = (function () {
         lightboxState.sequence = [];
         lightboxState.currentIndex = -1;
         setLightboxZoom(1);
+        hideLightboxLens();
+        updateLensButtonsState(false);
         updateLightboxNavButtons();
     }
 
-    function updateZoomButtonState(isEnabled) {
-        const zoomButton = document.querySelector("[data-lightbox-zoom]");
-        if (!zoomButton) {
+    function updateLensButtonsState(isEnabled) {
+        const smaller = document.querySelector("[data-lightbox-lens-smaller]");
+        const larger = document.querySelector("[data-lightbox-lens-larger]");
+        if (!smaller || !larger) {
             return;
         }
 
-        zoomButton.disabled = !isEnabled;
-        zoomButton.textContent = lightboxState.zoom > 1 ? "Lupa -" : "Lupa +";
+        const minSize = 120;
+        const maxSize = 280;
+
+        smaller.disabled = !isEnabled || lightboxState.lensSize <= minSize;
+        larger.disabled = !isEnabled || lightboxState.lensSize >= maxSize;
+    }
+
+    function setLightboxLensSize(size) {
+        const lens = getLightboxLens();
+        if (!lens) {
+            return;
+        }
+
+        const minSize = 120;
+        const maxSize = 280;
+        const nextSize = Math.min(maxSize, Math.max(minSize, size));
+        lightboxState.lensSize = nextSize;
+
+        lens.style.width = String(nextSize) + "px";
+        lens.style.height = String(nextSize) + "px";
+
+        const img = document.getElementById("lightbox-img");
+        updateLensButtonsState(Boolean(img && img.style.display === "block"));
     }
 
     function setLightboxZoom(scale) {
         const img = document.getElementById("lightbox-img");
+        const lens = getLightboxLens();
         if (!img) {
             return;
         }
 
         lightboxState.zoom = scale;
-        img.style.transform = "scale(" + String(scale) + ")";
-        img.style.transformOrigin = "center center";
-        img.style.cursor = scale > 1 ? "zoom-out" : "zoom-in";
-        updateZoomButtonState(img.style.display === "block");
+
+        const isActive = scale > 1 && img.style.display === "block";
+        img.style.cursor = isActive ? "none" : "zoom-in";
+
+        if (lens) {
+            lens.classList.toggle("active", isActive);
+        }
+
+        if (!isActive) {
+            hideLightboxLens();
+        }
+
+        updateLensButtonsState(img.style.display === "block");
     }
 
-    function toggleLightboxZoom() {
-        const img = document.getElementById("lightbox-img");
-        if (!img || img.style.display !== "block") {
+    function hideLightboxLens() {
+        const lens = getLightboxLens();
+        if (!lens) {
             return;
         }
 
-        setLightboxZoom(lightboxState.zoom > 1 ? 1 : 2);
+        lens.classList.remove("visible");
+    }
+
+    function updateLightboxLensPosition(event) {
+        const img = document.getElementById("lightbox-img");
+        const lens = getLightboxLens();
+
+        if (!img || !lens || lightboxState.zoom <= 1 || img.style.display !== "block") {
+            hideLightboxLens();
+            return;
+        }
+
+        const rect = img.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        if (x < 0 || y < 0 || x > rect.width || y > rect.height) {
+            hideLightboxLens();
+            return;
+        }
+
+        const lensSize = lightboxState.lensSize;
+        const half = lensSize / 2;
+
+        lens.style.left = String(event.clientX - half) + "px";
+        lens.style.top = String(event.clientY - half) + "px";
+        lens.style.backgroundImage = 'url("' + img.src + '")';
+        lens.style.backgroundSize =
+            String(rect.width * lightboxState.zoom) +
+            "px " +
+            String(rect.height * lightboxState.zoom) +
+            "px";
+        lens.style.backgroundPosition =
+            String(-(x * lightboxState.zoom - half)) +
+            "px " +
+            String(-(y * lightboxState.zoom - half)) +
+            "px";
+
+        lens.classList.add("visible");
     }
 
     function updateLightboxNavButtons() {
@@ -289,7 +369,12 @@ const ArtSite = (function () {
         document.addEventListener("click", function (event) {
             const prevButton = event.target.closest("[data-lightbox-prev]");
             const nextButton = event.target.closest("[data-lightbox-next]");
-            const zoomButton = event.target.closest("[data-lightbox-zoom]");
+            const smallerLensButton = event.target.closest(
+                "[data-lightbox-lens-smaller]",
+            );
+            const largerLensButton = event.target.closest(
+                "[data-lightbox-lens-larger]",
+            );
 
             if (prevButton) {
                 showLightboxByIndex(lightboxState.currentIndex - 1);
@@ -299,18 +384,25 @@ const ArtSite = (function () {
                 showLightboxByIndex(lightboxState.currentIndex + 1);
             }
 
-            if (zoomButton) {
-                toggleLightboxZoom();
+            if (smallerLensButton) {
+                setLightboxLensSize(lightboxState.lensSize - 20);
+            }
+
+            if (largerLensButton) {
+                setLightboxLensSize(lightboxState.lensSize + 20);
             }
         });
 
-        document.addEventListener("dblclick", function (event) {
-            const lightboxImage = event.target.closest("#lightbox-img");
-            if (!lightboxImage) {
-                return;
-            }
+        lightbox.addEventListener("mousemove", function (event) {
+            updateLightboxLensPosition(event);
+        });
 
-            toggleLightboxZoom();
+        lightbox.addEventListener("mouseleave", function () {
+            hideLightboxLens();
+        });
+
+        window.addEventListener("resize", function () {
+            hideLightboxLens();
         });
 
         document.addEventListener("keydown", function (event) {
