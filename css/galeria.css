@@ -1,16 +1,15 @@
-/* ── GALLERY PAGE ── */
+/* Gallery page */
 
-/* Active nav link */
 .nav-active {
     color: var(--umber) !important;
 }
 
-/* Page header — replaces full hero on subpages */
 .page-header {
     padding: 140px 48px 56px;
     background: var(--cream);
     border-bottom: 1px solid rgba(122, 92, 62, 0.12);
 }
+
 .page-title {
     font-family: "Cormorant Garamond", serif;
     font-size: clamp(44px, 7vw, 80px);
@@ -20,70 +19,81 @@
     letter-spacing: -0.01em;
     margin: 12px 0 20px;
 }
+
 .page-title em {
     font-style: italic;
     color: var(--bark);
 }
+
 .page-desc {
     font-size: 15px;
     font-weight: 300;
-    color: var(--bark);
-    max-width: 480px;
+    color: #5f462f;
+    max-width: 560px;
     line-height: 1.8;
 }
 
-/* ── FILTER BAR ── */
 .filter-bar {
     position: sticky;
     top: 64px;
     z-index: 50;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
     padding: 20px 48px;
-    background: rgba(242, 235, 224, 0.92);
+    background: rgba(242, 235, 224, 0.94);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(122, 92, 62, 0.12);
 }
+
+.filter-inner {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 .filter-btn {
-    padding: 7px 18px;
+    padding: 8px 16px;
     background: transparent;
-    border: 1px solid rgba(122, 92, 62, 0.3);
-    color: var(--bark);
+    border: 1px solid rgba(122, 92, 62, 0.35);
+    color: #5f462f;
     font-family: "Inter", sans-serif;
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.18s, color 0.18s, border-color 0.18s;
+    transition:
+        background 0.18s,
+        color 0.18s,
+        border-color 0.18s;
 }
+
 .filter-btn:hover {
     border-color: var(--bark);
     color: var(--umber);
 }
+
 .filter-btn.active {
     background: var(--umber);
     border-color: var(--umber);
     color: var(--cream);
 }
 
-/* ── MASONRY GRID ── */
+.full-gallery-wrap {
+    background: var(--white);
+}
+
 .full-gallery {
     columns: 3;
     column-gap: 20px;
     padding: 40px 48px 80px;
-    background: var(--white);
+    background: transparent;
 }
 
 .fg-item {
     break-inside: avoid;
     margin-bottom: 20px;
-    cursor: pointer;
     display: block;
 }
 
-/* hide/show for filters */
 .fg-item.hidden {
     display: none;
 }
@@ -94,148 +104,113 @@
     border: 1px solid rgba(122, 92, 62, 0.12);
     background: var(--parch);
 }
+
 .fg-frame img {
     width: 100%;
     height: auto;
     display: block;
     transition: transform 0.55s ease;
 }
+
 .fg-item:hover .fg-frame img {
     transform: scale(1.04);
 }
 
-/* placeholder variant */
 .fg-placeholder {
     aspect-ratio: 4/3;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
 }
-.fg-placeholder svg {
-    opacity: 0.3;
-}
-.fg-placeholder span {
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--bark);
-    opacity: 0.5;
+
+.fg-placeholder .painting-placeholder {
+    color: #f2ebe0;
 }
 
 .fg-caption {
     padding: 10px 0 0;
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    gap: 8px;
+    align-items: center;
+    gap: 12px;
 }
+
+.fg-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
 .fg-name {
     font-family: "Cormorant Garamond", serif;
     font-size: 16px;
     font-weight: 400;
     color: var(--umber);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
+
 .fg-meta {
     font-size: 11px;
     font-weight: 400;
     color: var(--sand);
     letter-spacing: 0.04em;
-    flex-shrink: 0;
 }
 
-/* ── EMPTY STATE ── */
 .gallery-empty {
     text-align: center;
-    padding: 64px 48px;
+    padding: 56px 24px 72px;
     font-size: 14px;
     font-weight: 300;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--sand);
+    color: #6b5040;
     background: var(--white);
 }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
     .full-gallery {
         columns: 2;
     }
 }
+
 @media (max-width: 900px) {
     .page-header {
         padding: 120px 24px 44px;
     }
+
     .filter-bar {
-        padding: 16px 24px;
         top: 58px;
+        padding: 16px 24px;
     }
+
     .full-gallery {
         columns: 2;
         padding: 28px 24px 60px;
     }
 }
+
 @media (max-width: 600px) {
     .full-gallery {
         columns: 1;
         padding: 20px 16px 48px;
     }
+
     .filter-bar {
-        gap: 6px;
         padding: 14px 16px;
     }
+
     .filter-btn {
         font-size: 10px;
         padding: 6px 13px;
     }
+
+    .fg-caption {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
+
 @media (prefers-reduced-motion: reduce) {
     .fg-frame img {
         transition: none;
     }
-}
-
-/* ── MAX WIDTH ── */
-.page-header .container,
-.filter-bar .container,
-.full-gallery.container {
-    max-width: 1280px;
-    margin: 0 auto;
-}
-
-/* ── INNER for galeria page ── */
-.page-header {
-    padding-left: 48px;
-    padding-right: 48px;
-}
-.filter-bar {
-    padding-left: 48px;
-    padding-right: 48px;
-}
-/* Full-gallery wrap keeps bg, inner constrains columns */
-.full-gallery-wrap {
-    background: var(--white);
-}
-.full-gallery.inner {
-    padding: 40px 48px 80px;
-    margin: 0 auto;
-}
-/* override the old standalone .full-gallery padding since wrap handles bg */
-.full-gallery {
-    background: transparent;
-}
-
-@media (max-width: 900px) {
-    .page-header { padding-left: 24px; padding-right: 24px; }
-    .filter-bar { padding-left: 24px; padding-right: 24px; }
-    .full-gallery.inner { padding: 28px 24px 60px; }
-}
-@media (max-width: 600px) {
-    .full-gallery.inner { padding: 20px 16px 48px; }
-    .filter-bar { padding-left: 16px; padding-right: 16px; }
 }

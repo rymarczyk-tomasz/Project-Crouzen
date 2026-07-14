@@ -1,0 +1,134 @@
+[
+    {
+        "id": "pejzaz-jesienny",
+        "title": "Pejzaz jesienny",
+        "technique": "Mieszana",
+        "dimensions": "60 x 80 cm",
+        "year": 2023,
+        "category": "mieszana",
+        "image": "img/IMG_1.jpg",
+        "placeholderColor": "#b79161",
+        "featured": true
+    },
+    {
+        "id": "portret-w-polcieniu",
+        "title": "Portret w polcieniu",
+        "technique": "Ołówek",
+        "dimensions": "50 x 70 cm",
+        "year": 2023,
+        "category": "olowek",
+        "image": "img/IMG_2.jpg",
+        "placeholderColor": "#8f7358",
+        "featured": true
+    },
+    {
+        "id": "abstrakcja-7",
+        "title": "Abstrakcja nr 7",
+        "technique": "Mieszana",
+        "dimensions": "40 x 40 cm",
+        "year": 2024,
+        "category": "mieszana",
+        "image": "img/IMG_3.jpg",
+        "placeholderColor": "#7d5d47",
+        "featured": true
+    },
+    {
+        "id": "nad-rzeka",
+        "title": "Nad rzeka",
+        "technique": "Pastela",
+        "dimensions": "30 x 42 cm",
+        "year": 2022,
+        "category": "pastel",
+        "image": "img/IMG_4.jpg",
+        "placeholderColor": "#c4a57b",
+        "featured": true
+    },
+    {
+        "id": "cisza",
+        "title": "Cisza",
+        "technique": "Pastela",
+        "dimensions": "30 x 40 cm",
+        "year": 2022,
+        "category": "pastel",
+        "image": null,
+        "placeholderColor": "#bfa070",
+        "featured": true
+    },
+    {
+        "id": "mglisty-poranek",
+        "title": "Mglisty poranek",
+        "technique": "Mieszana",
+        "dimensions": "70 x 50 cm",
+        "year": 2021,
+        "category": "mieszana",
+        "image": null,
+        "placeholderColor": "#9e7d60",
+        "featured": true
+    },
+    {
+        "id": "kompozycja-w-czerwieni",
+        "title": "Kompozycja w czerwieni",
+        "technique": "Mieszana",
+        "dimensions": "50 x 50 cm",
+        "year": 2024,
+        "category": "mieszana",
+        "image": null,
+        "placeholderColor": "#7a6048",
+        "featured": true
+    },
+    {
+        "id": "zachod-slonca",
+        "title": "Zachod slonca",
+        "technique": "Pastela",
+        "dimensions": "21 x 30 cm",
+        "year": 2023,
+        "category": "pastel",
+        "image": null,
+        "placeholderColor": "#c5a882",
+        "featured": false
+    },
+    {
+        "id": "rytm",
+        "title": "Rytm",
+        "technique": "Mieszana",
+        "dimensions": "60 x 90 cm",
+        "year": 2022,
+        "category": "mieszana",
+        "image": null,
+        "placeholderColor": "#8b6e52",
+        "featured": false
+    },
+    {
+        "id": "pole-latem",
+        "title": "Pole latem",
+        "technique": "Mieszana",
+        "dimensions": "80 x 100 cm",
+        "year": 2020,
+        "category": "mieszana",
+        "image": null,
+        "placeholderColor": "#a87d5a",
+        "featured": false
+    },
+    {
+        "id": "portret-1",
+        "title": "Portret I",
+        "technique": "Ołówek",
+        "dimensions": "40 x 60 cm",
+        "year": 2021,
+        "category": "olowek",
+        "image": null,
+        "placeholderColor": "#d4b896",
+        "featured": false
+    },
+    {
+        "id": "struktura",
+        "title": "Struktura",
+        "technique": "Mieszana",
+        "dimensions": "70 x 70 cm",
+        "year": 2023,
+        "category": "mieszana",
+        "image": null,
+        "placeholderColor": "#6b5040",
+        "featured": false
+    }
+]

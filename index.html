@@ -15,343 +15,252 @@
     <body>
         <!-- NAV -->
         <nav>
-            <a href="#" class="nav-name">Theodor Buchholz</a>
-            <ul class="nav-links">
-                <li><a href="galeria.html">Galeria</a></li>
-                <li><a href="#o-artyscie">O artyście</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
-            </ul>
+            <div class="inner">
+                <a href="#" class="nav-name">Theodor Buchholz</a>
+                <button
+                    class="nav-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="primary-nav"
+                    aria-label="Otwórz menu"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links" id="primary-nav">
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <li>
+                        <a href="#o-artyscie" data-track-section>O artyście</a>
+                    </li>
+                    <li><a href="#kontakt" data-track-section>Kontakt</a></li>
+                </ul>
             </div>
         </nav>
 
         <!-- HERO -->
         <section class="hero" id="home">
             <div class="inner">
-            <div class="hero-bg-text" aria-hidden="true">Malarstwo</div>
-            <p class="hero-eyebrow">Portfolio · Malarstwo</p>
-            <h1 class="hero-title">Kolor<br />jako <em>język</em></h1>
-            <p class="hero-desc">
-                Różnorodne techniki, jeden głos. Prace olejne, akrylowe i
-                akwarele — każda z własną historią, każda z żywą barwą.
-            </p>
-            <a href="#galeria" class="hero-scroll">
-                <span class="hero-scroll-line"></span>
-                Przejdź do galerii
-            </a>
+                <div class="hero-bg-text" aria-hidden="true">Malarstwo</div>
+                <p class="hero-eyebrow">Portfolio · Malarstwo</p>
+                <h1 class="hero-title">Kolor<br />jako <em>język</em></h1>
+                <p class="hero-desc">
+                    Różnorodne techniki, jeden głos. Prace olejne, akrylowe i
+                    akwarele — każda z własną historią, każda z żywą barwą.
+                </p>
+                <a href="#galeria" class="hero-scroll">
+                    <span class="hero-scroll-line"></span>
+                    Przejdź do galerii
+                </a>
             </div>
         </section>
 
         <!-- GALLERY -->
         <section id="galeria">
             <div class="inner">
-            <div class="section-header">
-                <span class="section-num">01</span>
-                <h2 class="section-title">Galeria prac</h2>
-                <span class="section-rule"></span>
-            </div>
-            <div class="gallery-grid">
-                <!-- Painting 1 -->
-                <div
-                    class="painting"
-                    onclick="
-                        openLightbox(
-                            'Pejzaż jesienny',
-                            'Olej na płótnie · 60 × 80 cm · 2023',
-                            'img/IMG_1.jpg',
-                        )
-                    "
-                >
-                    <div class="painting-frame">
-                        <img src="img/IMG_1.jpg" alt="Pejzaż jesienny" />
-                    </div>
-                    <div class="painting-caption">
-                        <span class="painting-name">Pejzaż jesienny</span>
-                        <span class="painting-meta">Olej · 60×80 cm</span>
-                    </div>
+                <div class="section-header">
+                    <span class="section-num">01</span>
+                    <h2 class="section-title">Galeria prac</h2>
+                    <span class="section-rule"></span>
                 </div>
-
-                <!-- Painting 2 -->
                 <div
-                    class="painting"
-                    onclick="
-                        openLightbox(
-                            'Portret w półcieniu',
-                            'Olej na płótnie · 50 × 70 cm · 2023',
-                            'img/IMG_2.jpg',
-                        )
-                    "
-                >
-                    <div class="painting-frame">
-                        <img src="img/IMG_2.jpg" alt="Portret w półcieniu" />
-                    </div>
-                    <div class="painting-caption">
-                        <span class="painting-name">Portret w półcieniu</span>
-                        <span class="painting-meta">Olej · 50×70 cm</span>
-                    </div>
-                </div>
+                    class="gallery-grid"
+                    id="featured-gallery"
+                    aria-live="polite"
+                ></div>
 
-                <!-- Paintings 3-5 -->
-                <div
-                    class="painting"
-                    onclick="
-                        openLightbox(
-                            'Abstrakcja nr 7',
-                            'Akryl na płótnie · 40 × 40 cm · 2024',
-                            'img/IMG_3.jpg',
-                        )
-                    "
-                >
-                    <div class="painting-frame">
-                        <img src="img/IMG_3.jpg" alt="Abstrakcja nr 7" />
-                    </div>
-                    <div class="painting-caption">
-                        <span class="painting-name">Abstrakcja nr 7</span>
-                        <span class="painting-meta">Akryl · 40×40 cm</span>
-                    </div>
+                <div class="gallery-footer">
+                    <a href="galeria.html" class="btn-gallery">
+                        Zobacz całą galerię
+                        <span class="btn-gallery-arrow">→</span>
+                    </a>
                 </div>
-
-                <div
-                    class="painting"
-                    onclick="
-                        openLightbox(
-                            'Nad rzeką',
-                            'Akwarela · 30 × 42 cm · 2022',
-                            'img/IMG_4.jpg',
-                        )
-                    "
-                >
-                    <div class="painting-frame">
-                        <img src="img/IMG_4.jpg" alt="Nad rzeką" />
-                    </div>
-                    <div class="painting-caption">
-                        <span class="painting-name">Nad rzeką</span>
-                        <span class="painting-meta">Akwarela · 30×42 cm</span>
-                    </div>
-                </div>
-
-                <div
-                    class="painting"
-                    onclick="
-                        openLightbox(
-                            'Cisza',
-                            'Pastel suchy · 30 × 40 cm · 2022',
-                            null,
-                        )
-                    "
-                >
-                    <div class="painting-frame">
-                        <div
-                            class="painting-placeholder"
-                            style="background: #bfa070"
-                        >
-                            <svg
-                                width="36"
-                                height="36"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#7A5C3E"
-                                stroke-width="1.5"
-                            >
-                                <rect
-                                    x="3"
-                                    y="3"
-                                    width="18"
-                                    height="18"
-                                    rx="1"
-                                />
-                                <path d="M3 9l4-4 4 4 4-6 4 6" />
-                                <circle cx="8.5" cy="13.5" r="1.5" />
-                            </svg>
-                            <span>Dodaj zdjęcie</span>
-                        </div>
-                    </div>
-                    <div class="painting-caption">
-                        <span class="painting-name">Cisza</span>
-                        <span class="painting-meta">Pastel · 30×40 cm</span>
-                    </div>
-                </div>
-
-                <div
-                    class="painting"
-                    onclick="
-                        openLightbox(
-                            'Mglisty poranek',
-                            'Olej na desce · 70 × 50 cm · 2021',
-                            null,
-                        )
-                    "
-                >
-                    <div class="painting-frame">
-                        <div
-                            class="painting-placeholder"
-                            style="background: #9e7d60"
-                        >
-                            <svg
-                                width="36"
-                                height="36"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#F2EBE0"
-                                stroke-width="1.5"
-                            >
-                                <rect
-                                    x="3"
-                                    y="3"
-                                    width="18"
-                                    height="18"
-                                    rx="1"
-                                />
-                                <path d="M3 9l4-4 4 4 4-6 4 6" />
-                                <circle cx="8.5" cy="13.5" r="1.5" />
-                            </svg>
-                            <span>Dodaj zdjęcie</span>
-                        </div>
-                    </div>
-                    <div class="painting-caption">
-                        <span class="painting-name">Mglisty poranek</span>
-                        <span class="painting-meta"
-                            >Olej na desce · 70×50 cm</span
-                        >
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-footer">
-                <a href="galeria.html" class="btn-gallery">
-                    Zobacz całą galerię
-                    <span class="btn-gallery-arrow">→</span>
-                </a>
-            </div>
             </div>
         </section>
 
         <!-- ABOUT -->
         <section id="o-artyscie">
             <div class="inner">
-            <div class="section-header">
-                <span class="section-num">02</span>
-                <h2 class="section-title">O artyście</h2>
-                <span class="section-rule"></span>
-            </div>
-            <div class="about-grid">
-                <div class="about-photo">
-                    <img src="img/Korzen.jpg" alt="Zdjęcie artysty" />
+                <div class="section-header">
+                    <span class="section-num">02</span>
+                    <h2 class="section-title">O artyście</h2>
+                    <span class="section-rule"></span>
                 </div>
-                <div class="about-content">
-                    <h2 class="about-name">Theodor<br /><em>Buchholz</em></h2>
-                    <p class="about-bio">
-                        Malarz o szerokich zainteresowaniach artystycznych —
-                        swobodnie porusza się między realizmem a abstrakcją,
-                        eksplorując granice formy i koloru. W swojej pracy łączy
-                        tradycyjne techniki olejne z eksperymentalnym podejściem
-                        do materii i gestu.
-                    </p>
-                    <p class="about-bio">
-                        Tworzy obrazy, które są zaproszeniem do zatrzymania się
-                        — każda praca niesie ze sobą nastrój, chwilę, historię.
-                        Inspirację czerpie z natury, ciszy i codziennych
-                        obserwacji, które przetwarza na język barwy i faktury.
-                    </p>
-                    <div class="about-tags">
-                        <span class="tag">Olej na płótnie</span>
-                        <span class="tag">Akwarela</span>
-                        <span class="tag">Akryl</span>
-                        <span class="tag">Pastel</span>
-                        <span class="tag">Technika mieszana</span>
+                <div class="about-grid">
+                    <div class="about-photo">
+                        <img src="img/Korzen.jpg" alt="Zdjęcie artysty" />
+                    </div>
+                    <div class="about-content">
+                        <h2 class="about-name">
+                            Theodor<br /><em>Buchholz</em>
+                        </h2>
+                        <p class="about-bio">
+                            Malarz o szerokich zainteresowaniach artystycznych —
+                            swobodnie porusza się między realizmem a abstrakcją,
+                            eksplorując granice formy i koloru. W swojej pracy
+                            łączy tradycyjne techniki olejne z eksperymentalnym
+                            podejściem do materii i gestu.
+                        </p>
+                        <p class="about-bio">
+                            Tworzy obrazy, które są zaproszeniem do zatrzymania
+                            się — każda praca niesie ze sobą nastrój, chwilę,
+                            historię. Inspirację czerpie z natury, ciszy i
+                            codziennych obserwacji, które przetwarza na język
+                            barwy i faktury.
+                        </p>
+                        <div class="about-tags">
+                            <span class="tag">Olej na płótnie</span>
+                            <span class="tag">Akwarela</span>
+                            <span class="tag">Akryl</span>
+                            <span class="tag">Pastel</span>
+                            <span class="tag">Technika mieszana</span>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </section>
 
         <!-- CONTACT -->
         <section id="kontakt">
             <div class="inner">
-            <div class="section-header">
-                <span class="section-num">03</span>
-                <h2 class="section-title">Kontakt</h2>
-                <span class="section-rule"></span>
-            </div>
-            <div class="contact-grid">
-                <div>
-                    <p class="contact-intro">
-                        Masz pytanie o pracę?<br />Chętnie odpiszę.
-                    </p>
-                    <div class="contact-item">
-                        <span class="contact-label">E-mail</span>
-                        <span class="contact-value"
-                            ><a href="mailto:theodor@example.com"
-                                >theodor@example.com</a
-                            ></span
-                        >
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">Telefon</span>
-                        <span class="contact-value">+48 000 000 000</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">Instagram</span>
-                        <span class="contact-value"
-                            ><a
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noopener"
-                                >@theodorbuchholz</a
-                            ></span
-                        >
-                    </div>
+                <div class="section-header">
+                    <span class="section-num">03</span>
+                    <h2 class="section-title">Kontakt</h2>
+                    <span class="section-rule"></span>
                 </div>
-                <form class="contact-form" onsubmit="handleSubmit(event)">
-                    <div class="field">
-                        <label for="name">Imię i nazwisko</label>
+                <div class="contact-grid">
+                    <div>
+                        <p class="contact-intro">
+                            Masz pytanie o pracę?<br />Chętnie odpiszę.
+                        </p>
+                        <div class="contact-item">
+                            <span class="contact-label">E-mail</span>
+                            <span class="contact-value"
+                                ><a href="mailto:theodor@example.com"
+                                    >theodor@example.com</a
+                                ></span
+                            >
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Telefon</span>
+                            <span class="contact-value">+48 000 000 000</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Instagram</span>
+                            <span class="contact-value"
+                                ><a
+                                    href="https://instagram.com"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >@theodorbuchholz</a
+                                ></span
+                            >
+                        </div>
+                    </div>
+                    <form
+                        class="contact-form"
+                        action="https://formsubmit.co/theodor@example.com"
+                        method="POST"
+                    >
                         <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Jan Kowalski"
+                            type="hidden"
+                            name="_subject"
+                            value="Nowa wiadomość ze strony portfolio"
                         />
-                    </div>
-                    <div class="field">
-                        <label for="email">Adres e-mail</label>
+                        <input type="hidden" name="_captcha" value="false" />
+                        <input type="hidden" name="_template" value="table" />
                         <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="jan@example.com"
+                            type="hidden"
+                            name="_autoresponse"
+                            value="Dziękuję za wiadomość. Odpowiem najszybciej, jak to możliwe."
                         />
-                    </div>
-                    <div class="field">
-                        <label for="message">Wiadomość</label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            rows="5"
-                            placeholder="Czym mogę się z Tobą podzielić?"
-                        ></textarea>
-                    </div>
-                    <button type="submit" class="btn-send">
-                        Wyślij wiadomość
-                    </button>
-                    <p id="form-success" class="form-success">
-                        Wiadomość wysłana — dziękuję za kontakt.
-                    </p>
-                </form>
-            </div>
+                        <input
+                            type="hidden"
+                            name="_next"
+                            value="index.html?wyslano=1#kontakt"
+                        />
+                        <input
+                            type="hidden"
+                            name="artwork"
+                            id="artwork-hidden"
+                        />
+                        <div class="field">
+                            <label for="name">Imię i nazwisko</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Jan Kowalski"
+                                required
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="email">Adres e-mail</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="jan@example.com"
+                                required
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="message">Wiadomość</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="5"
+                                placeholder="Czym mogę się z Tobą podzielić?"
+                                required
+                            ></textarea>
+                        </div>
+                        <button type="submit" class="btn-send">
+                            Wyślij wiadomość
+                        </button>
+                        <p id="form-success" class="form-success">
+                            Wiadomość wysłana — dziękuję za kontakt.
+                        </p>
+                    </form>
+                </div>
             </div>
         </section>
 
         <!-- FOOTER -->
         <footer>
             <div class="inner">
-            <span>© <span id="footer-year"></span> Theodor Buchholz</span>
-            <a href="#home">Powrót na górę ↑</a>
+                <span>© <span id="footer-year"></span> Theodor Buchholz</span>
+                <a href="#home">Powrót na górę ↑</a>
             </div>
         </footer>
 
         <!-- LIGHTBOX -->
-        <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-            <button class="lightbox-close" onclick="closeLightbox()">
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+            <button class="lightbox-close" data-lightbox-close type="button">
                 Zamknij ×
+            </button>
+            <button
+                class="lightbox-zoom"
+                data-lightbox-zoom
+                type="button"
+                aria-label="Przybliz lub oddal obraz"
+            >
+                Lupa +
+            </button>
+            <button
+                class="lightbox-nav lightbox-prev"
+                data-lightbox-prev
+                type="button"
+                aria-label="Poprzedni obraz"
+            >
+                ←
+            </button>
+            <button
+                class="lightbox-nav lightbox-next"
+                data-lightbox-next
+                type="button"
+                aria-label="Następny obraz"
+            >
+                →
             </button>
             <div class="lightbox-placeholder" id="lightbox-placeholder">
                 <svg
