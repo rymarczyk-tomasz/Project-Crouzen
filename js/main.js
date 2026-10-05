@@ -446,9 +446,12 @@ const ArtSite = (function () {
                     document
                         .getElementById("kontakt")
                         .scrollIntoView({ behavior: "smooth" });
-                    document.getElementById("name").focus({
-                        preventScroll: true,
-                    });
+                    // Na telefonie fokus otworzyłby klawiaturę w trakcie przewijania
+                    if (canUseLens) {
+                        document.getElementById("name").focus({
+                            preventScroll: true,
+                        });
+                    }
                 }
             }
         });
@@ -460,7 +463,13 @@ const ArtSite = (function () {
         lightbox.addEventListener(
             "touchstart",
             function (event) {
-                touchStartX = event.touches[0].clientX;
+                // Pomijamy gest dwoma palcami i przesuwanie powiększonego obrazu
+                const isZoomed =
+                    window.visualViewport && window.visualViewport.scale > 1;
+                touchStartX =
+                    event.touches.length === 1 && !isZoomed
+                        ? event.touches[0].clientX
+                        : null;
             },
             { passive: true },
         );
