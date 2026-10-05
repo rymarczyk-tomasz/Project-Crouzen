@@ -3,7 +3,7 @@
 Statyczna strona (HTML/CSS/JS, bez kompilacji). Prace i dane kontaktowe są w plikach JSON,
 które można edytować ręcznie albo przez panel pod adresem **`/admin/`**.
 
-```
+```text
 index.html          strona główna (wybrane prace, o artyście, kontakt)
 galeria.html        pełna galeria z filtrami
 data/artworks.json  lista prac
@@ -14,7 +14,7 @@ admin/              panel właściciela (Sveltia CMS)
 
 ## Panel właściciela (`/admin/`)
 
-Panel zapisuje zmiany bezpośrednio w repozytorium na GitHubie (gałąź `main`),
+Panel zapisuje zmiany bezpośrednio w repozytorium na GitHubie (gałąź `dev`, z której budowany jest GitHub Pages),
 więc po chwili są widoczne na stronie.
 
 ### Pierwsze logowanie
@@ -25,9 +25,10 @@ więc po chwili są widoczne na stronie.
    **Fine-grained tokens** → Generate new token.
    - Repository access: tylko `Project-Crouzen`
    - Permissions → Contents: **Read and write**
-3. Otwórz `https://<adres-strony>/admin/`, kliknij **Sign In with Token** i wklej token.
+3. Otwórz <https://rymarczyk-tomasz.github.io/Project-Crouzen/admin/>, kliknij
+   **Zaloguj się za pomocą tokenu dostępu** i wklej token.
 
-Wygodniejsze logowanie przyciskiem „Zaloguj przez GitHub” wymaga postawienia
+Wygodniejsze logowanie przyciskiem „Zaloguj się przez GitHub” wymaga postawienia
 [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) (darmowy Cloudflare Worker)
 i dopisania `base_url` w `admin/config.yml`.
 
@@ -45,7 +46,7 @@ i dopisania `base_url` w `admin/config.yml`.
 Strona wczytuje dane przez `fetch`, więc nie zadziała po otwarciu pliku dwuklikiem (`file://`).
 Uruchom serwer, np. rozszerzenie **Live Server** w VS Code albo `npx serve`.
 Panel lokalnie: otwórz `http://localhost:…/admin/` w Chrome/Edge i wybierz
-**Work with Local Repository**, wskazując folder projektu — bez logowania.
+**Pracuj z lokalnym repozytorium**, wskazując folder projektu — bez logowania.
 
 ## Formularz kontaktowy (FormSubmit)
 
@@ -57,8 +58,12 @@ Formularz jest wyłączony, dopóki w *Dane kontaktowe* nie ma adresu e-mail.
 3. (Zalecane) W mailu aktywacyjnym jest losowy kod formularza — wpisz go w polu
    *Kod formularza FormSubmit*, żeby adres e-mail nie był widoczny w kodzie strony.
 
-## Przed publikacją
+## Adres strony i własna domena
 
-- `og:image` w `index.html` i `galeria.html` — media społecznościowe wymagają pełnego adresu
-  (`https://twoja-domena.pl/img/...`); po ustaleniu domeny podmień ścieżkę.
+Strona: <https://rymarczyk-tomasz.github.io/Project-Crouzen/> (GitHub Pages z gałęzi `dev`).
+Po podpięciu własnej domeny podmień ten adres w `og:image` (`index.html`, `galeria.html`)
+oraz w `site_url` / `display_url` w `admin/config.yml`.
+
+## Do zrobienia
+
 - Zdjęcie `img/artysta.jpg` (≈330 KB) warto zmniejszyć / skonwertować do WebP.

@@ -2,13 +2,12 @@
 backend:
   name: github
   repo: rymarczyk-tomasz/Project-Crouzen
-  branch: main
+  branch: dev
   commit_messages:
     update: "Panel: aktualizacja {{collection}} ({{slug}})"
 
-# Po ustaleniu domeny odkomentuj (wymagany pełny adres):
-# site_url: https://twoja-domena.pl
-# display_url: https://twoja-domena.pl
+site_url: https://rymarczyk-tomasz.github.io/Project-Crouzen/
+display_url: https://rymarczyk-tomasz.github.io/Project-Crouzen/
 logo_url: ../img/favicon.svg
 
 # Ścieżka zapisywana w JSON zaczyna się od "/", strona usuwa ją sama,
