@@ -1,0 +1,117 @@
+# Konfiguracja panelu (Sveltia CMS) — instrukcja w README.md
+backend:
+  name: github
+  repo: rymarczyk-tomasz/Project-Crouzen
+  branch: main
+  commit_messages:
+    update: "Panel: aktualizacja {{collection}} ({{slug}})"
+
+# Po ustaleniu domeny odkomentuj (wymagany pełny adres):
+# site_url: https://twoja-domena.pl
+# display_url: https://twoja-domena.pl
+logo_url: ../img/favicon.svg
+
+# Ścieżka zapisywana w JSON zaczyna się od "/", strona usuwa ją sama,
+# dzięki czemu działa też pod podkatalogiem (np. GitHub Pages).
+media_folder: img/prace
+public_folder: /img/prace
+
+media_libraries:
+  default:
+    config:
+      max_file_size: 15000000
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2400
+          height: 2400
+
+collections:
+  - name: prace
+    label: Prace
+    files:
+      - name: artworks
+        label: Lista prac
+        file: data/artworks.json
+        format: json
+        fields:
+          - name: artworks
+            label: Prace
+            label_singular: pracę
+            widget: list
+            root: true
+            add_to_top: true
+            collapsed: true
+            summary: "{{title}} · {{year}}"
+            thumbnail: image
+            hint: "Kolejność na liście = kolejność na stronie (przeciągnij, aby zmienić). Prace bez zdjęcia lub z wyłączonym „Pokaż na stronie” są ukryte."
+            fields:
+              - { name: title, label: Tytuł, widget: string }
+              - name: image
+                label: Zdjęcie
+                widget: image
+                required: false
+                choose_url: false
+                hint: "Zdjęcie zostanie automatycznie zmniejszone i zapisane jako WebP."
+              - name: category
+                label: Kategoria (do filtrów galerii)
+                widget: select
+                default: mieszana
+                options:
+                  - { label: Olej, value: olej }
+                  - { label: Akryl, value: akryl }
+                  - { label: Akwarela, value: akwarela }
+                  - { label: Pastela, value: pastel }
+                  - { label: Ołówek, value: olowek }
+                  - { label: Technika mieszana, value: mieszana }
+              - name: technique
+                label: Technika (opis)
+                widget: string
+                required: false
+                hint: "Np. „Olej na płótnie”. Jeśli puste, pokaże się nazwa kategorii."
+              - { name: dimensions, label: Wymiary, widget: string, required: false, hint: "Np. 60 × 80 cm" }
+              - { name: year, label: Rok, widget: number, value_type: int, required: false }
+              - name: status
+                label: Dostępność
+                widget: select
+                default: dostepny
+                options:
+                  - { label: Dostępny, value: dostepny }
+                  - { label: Zarezerwowany, value: zarezerwowany }
+                  - { label: Sprzedany, value: sprzedany }
+                  - { label: Nie na sprzedaż, value: niedostepny }
+              - name: price
+                label: Cena
+                widget: string
+                required: false
+                hint: "Np. 2 400 zł. Puste = „cena na zapytanie”. Widoczna tylko dla dostępnych prac."
+              - { name: description, label: Opis, widget: text, required: false }
+              - name: featured
+                label: Wyróżniona na stronie głównej
+                widget: boolean
+                default: false
+                hint: "Strona główna pokazuje do 6 wyróżnionych prac."
+              - { name: published, label: Pokaż na stronie, widget: boolean, default: true }
+
+  - name: ustawienia
+    label: Ustawienia
+    files:
+      - name: site
+        label: Dane kontaktowe
+        file: data/site.json
+        format: json
+        fields:
+          - name: email
+            label: Adres e-mail
+            widget: string
+            required: false
+            hint: "Na ten adres trafią wiadomości z formularza. Dopóki pole jest puste, formularz jest wyłączony."
+          - name: formId
+            label: Kod formularza FormSubmit (opcjonalnie)
+            widget: string
+            required: false
+            hint: "Po aktywacji FormSubmit przysyła losowy kod — wpisz go tutaj, żeby ukryć adres e-mail przed botami."
+          - { name: phone, label: Telefon, widget: string, required: false, hint: "Np. +48 600 100 200" }
+          - { name: instagram, label: "Instagram (nazwa konta, bez @)", widget: string, required: false }
