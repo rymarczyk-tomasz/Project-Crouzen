@@ -32,6 +32,17 @@ Wygodniejsze logowanie przyciskiem „Zaloguj się przez GitHub” wymaga postaw
 [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) (darmowy Cloudflare Worker)
 i dopisania `base_url` w `admin/config.yml`.
 
+### Panel na iPhonie
+
+1. Otwórz adres panelu w **Safari** → przycisk *Udostępnij* → **Do ekranu początkowego**.
+   Panel będzie się otwierał jak aplikacja (ikona „TB”).
+2. Zaloguj się tokenem **już w tej aplikacji** (ma osobną pamięć niż Safari).
+   Token zapisz w Hasłach / notatkach — przyda się, gdyby trzeba było zalogować się ponownie.
+3. Zdjęcia można wybierać prosto z Galerii lub zrobić aparatem; zdjęcia z iPhone'a
+   (także HEIC) są automatycznie zmniejszane i zapisywane jako WebP.
+
+Utworzenie tokenu najwygodniej zrobić raz na komputerze.
+
 ### Co można zrobić w panelu
 
 - **Prace → Lista prac** — dodać pracę (zdjęcie jest automatycznie zmniejszane i zapisywane
