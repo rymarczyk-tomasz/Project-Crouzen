@@ -1,58 +1,107 @@
 const ArtSite = (function () {
     const DATA_URL = "data/artworks.json";
+    const SITE_URL = "data/site.json";
+    const FEATURED_LIMIT = 6;
+    const LENS_MIN = 120;
+    const LENS_MAX = 280;
+
     const categoryLabels = {
         olej: "Olej",
         akryl: "Akryl",
         akwarela: "Akwarela",
         pastel: "Pastela",
         olowek: "Ołówek",
-        mieszana: "Mieszana",
+        mieszana: "Technika mieszana",
     };
 
-    let artworksCache = null;
+    const statusLabels = {
+        dostepny: "Dostępny",
+        zarezerwowany: "Zarezerwowany",
+        sprzedany: "Sprzedany",
+        niedostepny: "Nie na sprzedaż",
+    };
+
+    let artworksPromise = null;
+    let sitePromise = null;
     let artworksById = new Map();
+
     const lightboxState = {
         sequence: [],
         currentIndex: -1,
-        zoom: 1,
         lensSize: 180,
+        returnFocus: null,
     };
 
-    function getLightboxLens() {
-        let lens = document.getElementById("lightbox-lens");
-        if (lens) {
-            return lens;
-        }
+    const canUseLens = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+    ).matches;
 
-        const lightbox = document.getElementById("lightbox");
-        if (!lightbox) {
-            return null;
-        }
+    /* ── DATA ── */
 
-        lens = document.createElement("div");
-        lens.id = "lightbox-lens";
-        lens.className = "lightbox-lens";
-        lens.setAttribute("aria-hidden", "true");
-        lightbox.appendChild(lens);
-        return lens;
+    function slugify(text) {
+        return String(text || "")
+            .toLowerCase()
+            .replace(/ł/g, "l")
+            .normalize("NFD")
+            .replace(/[̀-ͯ]/g, "")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
     }
 
-    async function getArtworks() {
-        if (artworksCache) {
-            return artworksCache;
-        }
+    function normalizeArtworks(data) {
+        const list = Array.isArray(data) ? data : [];
+        const usedIds = new Set();
 
-        const response = await fetch(DATA_URL);
-        if (!response.ok) {
-            throw new Error("Nie udalo sie wczytac danych galerii.");
-        }
+        return list
+            .filter((item) => item && item.image && item.published !== false)
+            .map(function (item) {
+                const baseId = slugify(item.title) || "praca";
+                let id = baseId;
+                let counter = 2;
+                while (usedIds.has(id)) {
+                    id = baseId + "-" + counter++;
+                }
+                usedIds.add(id);
 
-        const data = await response.json();
-        artworksCache = Array.isArray(data) ? data : [];
-        artworksById = new Map(
-            artworksCache.map((artwork) => [artwork.id, artwork]),
-        );
-        return artworksCache;
+                return Object.assign({}, item, {
+                    id: id,
+                    image: String(item.image).replace(/^\/+/, ""),
+                    status: item.status || "dostepny",
+                });
+            });
+    }
+
+    function getArtworks() {
+        if (!artworksPromise) {
+            artworksPromise = fetch(DATA_URL, { cache: "no-cache" })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Nie udało się wczytać danych galerii.");
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    const artworks = normalizeArtworks(data);
+                    artworksById = new Map(
+                        artworks.map((artwork) => [artwork.id, artwork]),
+                    );
+                    return artworks;
+                })
+                .catch(function (error) {
+                    artworksPromise = null;
+                    throw error;
+                });
+        }
+        return artworksPromise;
+    }
+
+    function getSiteSettings() {
+        if (!sitePromise) {
+            sitePromise = fetch(SITE_URL, { cache: "no-cache" })
+                .then((response) => (response.ok ? response.json() : {}))
+                .catch(() => ({}));
+        }
+        return sitePromise;
     }
 
     function getArtworkById(id) {
@@ -63,12 +112,30 @@ const ArtSite = (function () {
         return categoryLabels[category] || category;
     }
 
-    function createPlaceholder() {
-        const placeholder = document.createElement("div");
-        placeholder.className = "painting-placeholder";
-        placeholder.innerHTML =
-            '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"></rect><path d="M3 9l4-4 4 4 4-6 4 6"></path><circle cx="8.5" cy="13.5" r="1.5"></circle></svg><span>Brak zdjecia</span>';
-        return placeholder;
+    function getArtworkMeta(artwork) {
+        return [
+            artwork.technique || getCategoryLabel(artwork.category),
+            artwork.dimensions,
+            artwork.year,
+        ]
+            .filter(Boolean)
+            .join(" · ");
+    }
+
+    function getInquiryUrl(artwork) {
+        return "index.html?art=" + encodeURIComponent(artwork.id) + "#kontakt";
+    }
+
+    /* ── CARDS ── */
+
+    function createStatusBadge(status) {
+        if (status !== "sprzedany" && status !== "zarezerwowany") {
+            return null;
+        }
+        const badge = document.createElement("span");
+        badge.className = "status-badge status-" + status;
+        badge.textContent = statusLabels[status];
+        return badge;
     }
 
     function createArtworkCard(artwork, mode) {
@@ -80,23 +147,21 @@ const ArtSite = (function () {
 
         const frame = document.createElement("button");
         frame.type = "button";
-        frame.className = isGalleryMode
-            ? "fg-frame artwork-open-trigger js-open-lightbox"
-            : "painting-frame artwork-open-trigger js-open-lightbox";
-        frame.setAttribute("aria-label", "Podglad obrazu: " + artwork.title);
+        frame.className =
+            (isGalleryMode ? "fg-frame" : "painting-frame") +
+            " artwork-open-trigger js-open-lightbox";
+        frame.setAttribute("aria-label", "Powiększ obraz: " + artwork.title);
 
-        if (artwork.image) {
-            const image = document.createElement("img");
-            image.src = artwork.image;
-            image.alt = artwork.title;
-            image.loading = "lazy";
-            frame.appendChild(image);
-        } else {
-            frame.classList.add(
-                isGalleryMode ? "fg-placeholder" : "painting-placeholder-frame",
-            );
-            frame.style.background = artwork.placeholderColor || "#bfa070";
-            frame.appendChild(createPlaceholder());
+        const image = document.createElement("img");
+        image.src = artwork.image;
+        image.alt = artwork.title;
+        image.loading = "lazy";
+        image.decoding = "async";
+        frame.appendChild(image);
+
+        const badge = createStatusBadge(artwork.status);
+        if (badge) {
+            frame.appendChild(badge);
         }
 
         const caption = document.createElement("div");
@@ -105,22 +170,16 @@ const ArtSite = (function () {
         const textWrap = document.createElement("div");
         textWrap.className = isGalleryMode ? "fg-text" : "painting-text";
 
-        const name = document.createElement("span");
+        const name = document.createElement("h3");
         name.className = isGalleryMode ? "fg-name" : "painting-name";
         name.textContent = artwork.title;
 
         const meta = document.createElement("span");
         meta.className = isGalleryMode ? "fg-meta" : "painting-meta";
-        meta.textContent =
-            artwork.technique +
-            " · " +
-            artwork.dimensions +
-            " · " +
-            String(artwork.year);
+        meta.textContent = getArtworkMeta(artwork);
 
         textWrap.appendChild(name);
         textWrap.appendChild(meta);
-
         caption.appendChild(textWrap);
 
         article.appendChild(frame);
@@ -129,129 +188,172 @@ const ArtSite = (function () {
         return article;
     }
 
-    function openLightbox(name, meta, src) {
-        const lb = document.getElementById("lightbox");
+    /* ── LIGHTBOX ── */
+
+    function buildLightbox() {
+        let lightbox = document.getElementById("lightbox");
+        if (lightbox) {
+            return lightbox;
+        }
+
+        lightbox = document.createElement("div");
+        lightbox.className = "lightbox";
+        lightbox.id = "lightbox";
+        lightbox.hidden = true;
+        lightbox.setAttribute("role", "dialog");
+        lightbox.setAttribute("aria-modal", "true");
+        lightbox.setAttribute("aria-labelledby", "lightbox-name");
+        lightbox.innerHTML =
+            '<div class="lightbox-toolbar">' +
+            '<div class="lightbox-lens-controls" role="group" aria-label="Rozmiar lupy">' +
+            '<button class="lightbox-lens-btn" data-lightbox-lens-smaller type="button" aria-label="Zmniejsz lupę">Lupa −</button>' +
+            '<button class="lightbox-lens-btn" data-lightbox-lens-larger type="button" aria-label="Powiększ lupę">Lupa +</button>' +
+            "</div>" +
+            '<span class="lightbox-counter" id="lightbox-counter" aria-live="polite"></span>' +
+            '<button class="lightbox-close" data-lightbox-close type="button">Zamknij ×</button>' +
+            "</div>" +
+            '<button class="lightbox-nav lightbox-prev" data-lightbox-prev type="button" aria-label="Poprzedni obraz">←</button>' +
+            '<button class="lightbox-nav lightbox-next" data-lightbox-next type="button" aria-label="Następny obraz">→</button>' +
+            '<figure class="lightbox-figure">' +
+            '<div class="lightbox-stage"><img class="lightbox-img" id="lightbox-img" alt="" /></div>' +
+            '<figcaption class="lightbox-caption">' +
+            '<p class="lc-name" id="lightbox-name"></p>' +
+            '<p class="lc-meta" id="lightbox-meta"></p>' +
+            '<p class="lc-status" id="lightbox-status"></p>' +
+            '<p class="lc-desc" id="lightbox-desc"></p>' +
+            '<a class="lightbox-cta" id="lightbox-cta" data-lightbox-inquiry href="#kontakt">Zapytaj o ten obraz</a>' +
+            "</figcaption>" +
+            "</figure>" +
+            '<div class="lightbox-lens" id="lightbox-lens" aria-hidden="true"></div>';
+
+        document.body.appendChild(lightbox);
+        return lightbox;
+    }
+
+    function isLightboxOpen() {
+        const lightbox = document.getElementById("lightbox");
+        return Boolean(lightbox && !lightbox.hidden);
+    }
+
+    function renderLightboxArtwork(artwork) {
         const img = document.getElementById("lightbox-img");
-        const ph = document.getElementById("lightbox-placeholder");
-        const nameEl = document.getElementById("lightbox-name");
-        const metaEl = document.getElementById("lightbox-meta");
+        const statusEl = document.getElementById("lightbox-status");
+        const descEl = document.getElementById("lightbox-desc");
+        const cta = document.getElementById("lightbox-cta");
+        const counter = document.getElementById("lightbox-counter");
+        const lens = document.getElementById("lightbox-lens");
 
-        if (!lb || !img || !ph || !nameEl || !metaEl) {
-            return;
+        document.getElementById("lightbox-name").textContent = artwork.title;
+        document.getElementById("lightbox-meta").textContent =
+            getArtworkMeta(artwork);
+
+        hideLightboxLens();
+        img.src = artwork.image;
+        img.alt = artwork.title;
+        lens.style.backgroundImage = 'url("' + artwork.image + '")';
+
+        let statusText = statusLabels[artwork.status] || "";
+        if (artwork.status === "dostepny") {
+            statusText += " · " + (artwork.price || "cena na zapytanie");
+        }
+        statusEl.textContent = statusText;
+        statusEl.dataset.status = artwork.status;
+
+        descEl.textContent = artwork.description || "";
+        descEl.hidden = !artwork.description;
+
+        cta.href = getInquiryUrl(artwork);
+        cta.dataset.artId = artwork.id;
+        cta.hidden = artwork.status === "sprzedany";
+
+        const total = lightboxState.sequence.length;
+        counter.textContent =
+            total > 1 ? lightboxState.currentIndex + 1 + " / " + total : "";
+
+        document
+            .querySelectorAll("[data-lightbox-prev], [data-lightbox-next]")
+            .forEach(function (button) {
+                button.hidden = total < 2;
+            });
+    }
+
+    function openLightbox(sequence, artId) {
+        const lightbox = buildLightbox();
+
+        lightboxState.sequence = sequence;
+        if (!isLightboxOpen()) {
+            lightboxState.returnFocus = document.activeElement;
         }
 
-        nameEl.textContent = name;
-        metaEl.textContent = meta;
-
-        if (src) {
-            img.src = src;
-            img.alt = name;
-            img.style.display = "block";
-            ph.style.display = "none";
-        } else {
-            img.style.display = "none";
-            ph.style.display = "flex";
-        }
-
-        lb.classList.add("open");
+        lightbox.hidden = false;
         document.body.style.overflow = "hidden";
         setLightboxLensSize(lightboxState.lensSize);
-        setLightboxZoom(src ? 2 : 1);
-        updateLensButtonsState(Boolean(src));
-        updateLightboxNavButtons();
+        showLightboxByIndex(Math.max(0, sequence.indexOf(artId)));
+        lightbox.querySelector("[data-lightbox-close]").focus();
     }
 
     function closeLightbox() {
-        const lb = document.getElementById("lightbox");
-        if (!lb) {
+        const lightbox = document.getElementById("lightbox");
+        if (!lightbox || lightbox.hidden) {
             return;
         }
 
-        lb.classList.remove("open");
+        lightbox.hidden = true;
         document.body.style.overflow = "";
+        hideLightboxLens();
         lightboxState.sequence = [];
         lightboxState.currentIndex = -1;
-        setLightboxZoom(1);
-        hideLightboxLens();
-        updateLensButtonsState(false);
-        updateLightboxNavButtons();
+
+        if (lightboxState.returnFocus && lightboxState.returnFocus.focus) {
+            lightboxState.returnFocus.focus();
+        }
     }
 
-    function updateLensButtonsState(isEnabled) {
-        const smaller = document.querySelector("[data-lightbox-lens-smaller]");
-        const larger = document.querySelector("[data-lightbox-lens-larger]");
-        if (!smaller || !larger) {
+    function showLightboxByIndex(index) {
+        const total = lightboxState.sequence.length;
+        if (!total) {
             return;
         }
 
-        const minSize = 120;
-        const maxSize = 280;
+        const normalizedIndex = (index + total) % total;
+        const artwork = getArtworkById(lightboxState.sequence[normalizedIndex]);
+        if (!artwork) {
+            return;
+        }
 
-        smaller.disabled = !isEnabled || lightboxState.lensSize <= minSize;
-        larger.disabled = !isEnabled || lightboxState.lensSize >= maxSize;
+        lightboxState.currentIndex = normalizedIndex;
+        renderLightboxArtwork(artwork);
     }
 
     function setLightboxLensSize(size) {
-        const lens = getLightboxLens();
+        const lens = document.getElementById("lightbox-lens");
+        const smaller = document.querySelector("[data-lightbox-lens-smaller]");
+        const larger = document.querySelector("[data-lightbox-lens-larger]");
         if (!lens) {
             return;
         }
 
-        const minSize = 120;
-        const maxSize = 280;
-        const nextSize = Math.min(maxSize, Math.max(minSize, size));
-        lightboxState.lensSize = nextSize;
+        lightboxState.lensSize = Math.min(LENS_MAX, Math.max(LENS_MIN, size));
+        lens.style.width = lightboxState.lensSize + "px";
+        lens.style.height = lightboxState.lensSize + "px";
 
-        lens.style.width = String(nextSize) + "px";
-        lens.style.height = String(nextSize) + "px";
-
-        const img = document.getElementById("lightbox-img");
-        updateLensButtonsState(Boolean(img && img.style.display === "block"));
-    }
-
-    function setLightboxZoom(scale) {
-        const img = document.getElementById("lightbox-img");
-        const lens = getLightboxLens();
-        if (!img) {
-            return;
+        if (smaller && larger) {
+            smaller.disabled = lightboxState.lensSize <= LENS_MIN;
+            larger.disabled = lightboxState.lensSize >= LENS_MAX;
         }
-
-        lightboxState.zoom = scale;
-
-        const isActive = scale > 1 && img.style.display === "block";
-        img.style.cursor = isActive ? "none" : "zoom-in";
-
-        if (lens) {
-            lens.classList.toggle("active", isActive);
-        }
-
-        if (!isActive) {
-            hideLightboxLens();
-        }
-
-        updateLensButtonsState(img.style.display === "block");
     }
 
     function hideLightboxLens() {
-        const lens = getLightboxLens();
-        if (!lens) {
-            return;
+        const lens = document.getElementById("lightbox-lens");
+        if (lens) {
+            lens.classList.remove("visible");
         }
-
-        lens.classList.remove("visible");
     }
 
     function updateLightboxLensPosition(event) {
         const img = document.getElementById("lightbox-img");
-        const lens = getLightboxLens();
-
-        if (
-            !img ||
-            !lens ||
-            lightboxState.zoom <= 1 ||
-            img.style.display !== "block"
-        ) {
-            hideLightboxLens();
+        const lens = document.getElementById("lightbox-lens");
+        if (!canUseLens || !img || !lens || !img.complete) {
             return;
         }
 
@@ -264,170 +366,136 @@ const ArtSite = (function () {
             return;
         }
 
-        const lensSize = lightboxState.lensSize;
-        const half = lensSize / 2;
+        // Powiększenie względem oryginalnej rozdzielczości zdjęcia (min. 2×)
+        const zoom = Math.max(2, img.naturalWidth / rect.width);
+        const half = lightboxState.lensSize / 2;
 
-        lens.style.left = String(event.clientX - half) + "px";
-        lens.style.top = String(event.clientY - half) + "px";
-        lens.style.backgroundImage = 'url("' + img.src + '")';
+        lens.style.left = event.clientX - half + "px";
+        lens.style.top = event.clientY - half + "px";
         lens.style.backgroundSize =
-            String(rect.width * lightboxState.zoom) +
-            "px " +
-            String(rect.height * lightboxState.zoom) +
-            "px";
+            rect.width * zoom + "px " + rect.height * zoom + "px";
         lens.style.backgroundPosition =
-            String(-(x * lightboxState.zoom - half)) +
-            "px " +
-            String(-(y * lightboxState.zoom - half)) +
-            "px";
-
+            -(x * zoom - half) + "px " + -(y * zoom - half) + "px";
         lens.classList.add("visible");
     }
 
-    function updateLightboxNavButtons() {
-        const prevButton = document.querySelector("[data-lightbox-prev]");
-        const nextButton = document.querySelector("[data-lightbox-next]");
-        const hasItems = lightboxState.sequence.length > 0;
+    function trapFocus(event, lightbox) {
+        const focusable = Array.from(
+            lightbox.querySelectorAll("button, a[href]"),
+        ).filter((el) => !el.disabled && !el.hidden && el.offsetParent);
 
-        if (prevButton) {
-            prevButton.disabled = !hasItems;
-        }
-
-        if (nextButton) {
-            nextButton.disabled = !hasItems;
-        }
-    }
-
-    function showLightboxByIndex(index) {
-        if (!lightboxState.sequence.length) {
+        if (!focusable.length) {
             return;
         }
 
-        const normalizedIndex =
-            (index + lightboxState.sequence.length) %
-            lightboxState.sequence.length;
-        const artId = lightboxState.sequence[normalizedIndex];
-        const artwork = getArtworkById(artId);
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
 
-        if (!artwork) {
-            return;
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
         }
-
-        const metaText =
-            artwork.technique +
-            " · " +
-            artwork.dimensions +
-            " · " +
-            String(artwork.year);
-
-        lightboxState.currentIndex = normalizedIndex;
-        openLightbox(artwork.title, metaText, artwork.image);
     }
 
     function initLightboxEvents() {
-        const lightbox = document.getElementById("lightbox");
-        if (!lightbox) {
-            return;
-        }
-
-        lightbox.addEventListener("click", function (event) {
-            if (
-                event.target === lightbox ||
-                event.target.closest("[data-lightbox-close]")
-            ) {
-                closeLightbox();
-            }
-        });
+        const lightbox = buildLightbox();
+        let touchStartX = null;
 
         document.addEventListener("click", function (event) {
             const trigger = event.target.closest(".js-open-lightbox");
-            if (!trigger) {
-                return;
-            }
-
-            const card = trigger.closest("[data-art-id]");
+            const card = trigger && trigger.closest("[data-art-id]");
             if (!card) {
                 return;
             }
 
-            const artwork = getArtworkById(card.dataset.artId);
-            if (!artwork) {
+            const sequence = Array.from(
+                document.querySelectorAll("[data-art-id]"),
+            ).map((item) => item.dataset.artId);
+
+            openLightbox(sequence, card.dataset.artId);
+        });
+
+        lightbox.addEventListener("click", function (event) {
+            if (
+                event.target === lightbox ||
+                event.target.classList.contains("lightbox-stage") ||
+                event.target.closest("[data-lightbox-close]")
+            ) {
+                closeLightbox();
+            } else if (event.target.closest("[data-lightbox-prev]")) {
+                showLightboxByIndex(lightboxState.currentIndex - 1);
+            } else if (event.target.closest("[data-lightbox-next]")) {
+                showLightboxByIndex(lightboxState.currentIndex + 1);
+            } else if (event.target.closest("[data-lightbox-lens-smaller]")) {
+                setLightboxLensSize(lightboxState.lensSize - 20);
+            } else if (event.target.closest("[data-lightbox-lens-larger]")) {
+                setLightboxLensSize(lightboxState.lensSize + 20);
+            } else if (event.target.closest("[data-lightbox-inquiry]")) {
+                const artwork = getArtworkById(
+                    event.target.closest("[data-lightbox-inquiry]").dataset
+                        .artId,
+                );
+                // Na stronie głównej formularz jest pod ręką — bez przeładowania
+                if (artwork && document.getElementById("contact-form")) {
+                    event.preventDefault();
+                    closeLightbox();
+                    prefillInquiry(artwork);
+                    document
+                        .getElementById("kontakt")
+                        .scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("name").focus({
+                        preventScroll: true,
+                    });
+                }
+            }
+        });
+
+        lightbox.addEventListener("mousemove", updateLightboxLensPosition);
+        lightbox.addEventListener("mouseleave", hideLightboxLens);
+        window.addEventListener("resize", hideLightboxLens);
+
+        lightbox.addEventListener(
+            "touchstart",
+            function (event) {
+                touchStartX = event.touches[0].clientX;
+            },
+            { passive: true },
+        );
+
+        lightbox.addEventListener("touchend", function (event) {
+            if (touchStartX === null) {
                 return;
             }
-
-            const cards = Array.from(
-                document.querySelectorAll("[data-art-id]"),
-            ).filter(function (item) {
-                return !item.classList.contains("hidden");
-            });
-
-            lightboxState.sequence = cards
-                .map(function (item) {
-                    return item.dataset.artId;
-                })
-                .filter(Boolean);
-
-            const index = lightboxState.sequence.indexOf(artwork.id);
-            showLightboxByIndex(index === -1 ? 0 : index);
-        });
-
-        document.addEventListener("click", function (event) {
-            const prevButton = event.target.closest("[data-lightbox-prev]");
-            const nextButton = event.target.closest("[data-lightbox-next]");
-            const smallerLensButton = event.target.closest(
-                "[data-lightbox-lens-smaller]",
-            );
-            const largerLensButton = event.target.closest(
-                "[data-lightbox-lens-larger]",
-            );
-
-            if (prevButton) {
-                showLightboxByIndex(lightboxState.currentIndex - 1);
+            const deltaX = event.changedTouches[0].clientX - touchStartX;
+            touchStartX = null;
+            if (Math.abs(deltaX) > 50) {
+                showLightboxByIndex(
+                    lightboxState.currentIndex + (deltaX < 0 ? 1 : -1),
+                );
             }
-
-            if (nextButton) {
-                showLightboxByIndex(lightboxState.currentIndex + 1);
-            }
-
-            if (smallerLensButton) {
-                setLightboxLensSize(lightboxState.lensSize - 20);
-            }
-
-            if (largerLensButton) {
-                setLightboxLensSize(lightboxState.lensSize + 20);
-            }
-        });
-
-        lightbox.addEventListener("mousemove", function (event) {
-            updateLightboxLensPosition(event);
-        });
-
-        lightbox.addEventListener("mouseleave", function () {
-            hideLightboxLens();
-        });
-
-        window.addEventListener("resize", function () {
-            hideLightboxLens();
         });
 
         document.addEventListener("keydown", function (event) {
-            if (!lightbox.classList.contains("open")) {
+            if (!isLightboxOpen()) {
                 return;
             }
 
             if (event.key === "Escape") {
                 closeLightbox();
-            }
-
-            if (event.key === "ArrowLeft") {
+            } else if (event.key === "ArrowLeft") {
                 showLightboxByIndex(lightboxState.currentIndex - 1);
-            }
-
-            if (event.key === "ArrowRight") {
+            } else if (event.key === "ArrowRight") {
                 showLightboxByIndex(lightboxState.currentIndex + 1);
+            } else if (event.key === "Tab") {
+                trapFocus(event, lightbox);
             }
         });
     }
+
+    /* ── LAYOUT ── */
 
     function updateFooterYear() {
         const yearElement = document.getElementById("footer-year");
@@ -443,40 +511,38 @@ const ArtSite = (function () {
 
         if (!nav || !toggle) return;
 
-        function closeNav() {
-            nav.classList.remove("nav-open");
-            toggle.setAttribute("aria-expanded", "false");
-            toggle.setAttribute("aria-label", "Otworz menu");
-        }
-
-        toggle.addEventListener("click", function () {
-            const isOpen = nav.classList.toggle("nav-open");
+        function setNavOpen(isOpen) {
+            nav.classList.toggle("nav-open", isOpen);
             toggle.setAttribute("aria-expanded", String(isOpen));
             toggle.setAttribute(
                 "aria-label",
-                isOpen ? "Zamknij menu" : "Otworz menu",
+                isOpen ? "Zamknij menu" : "Otwórz menu",
             );
+        }
+
+        toggle.addEventListener("click", function () {
+            setNavOpen(!nav.classList.contains("nav-open"));
         });
 
         links.forEach(function (link) {
-            link.addEventListener("click", closeNav);
+            link.addEventListener("click", () => setNavOpen(false));
         });
 
         document.addEventListener("click", function (event) {
             if (!nav.contains(event.target)) {
-                closeNav();
+                setNavOpen(false);
             }
         });
 
         document.addEventListener("keydown", function (event) {
             if (event.key === "Escape") {
-                closeNav();
+                setNavOpen(false);
             }
         });
 
         window.addEventListener("resize", function () {
             if (window.innerWidth > 600) {
-                closeNav();
+                setNavOpen(false);
             }
         });
     }
@@ -485,10 +551,6 @@ const ArtSite = (function () {
         const links = Array.from(
             document.querySelectorAll("[data-track-section]"),
         );
-        if (!links.length) {
-            return;
-        }
-
         const sections = links
             .map((link) => document.querySelector(link.getAttribute("href")))
             .filter(Boolean);
@@ -505,9 +567,7 @@ const ArtSite = (function () {
                     }
 
                     links.forEach(function (link) {
-                        const match =
-                            link.getAttribute("href") === "#" + entry.target.id;
-                        if (match) {
+                        if (link.getAttribute("href") === "#" + entry.target.id) {
                             link.setAttribute("aria-current", "location");
                         } else {
                             link.removeAttribute("aria-current");
@@ -524,6 +584,8 @@ const ArtSite = (function () {
         sections.forEach((section) => observer.observe(section));
     }
 
+    /* ── HOME PAGE ── */
+
     async function renderFeaturedGallery() {
         const container = document.getElementById("featured-gallery");
         if (!container) {
@@ -531,36 +593,135 @@ const ArtSite = (function () {
         }
 
         const artworks = await getArtworks();
-        const featured = artworks.filter((item) => item.featured).slice(0, 7);
+        let featured = artworks.filter((item) => item.featured);
+        // Brak wyróżnionych → pokaż najnowsze
+        if (!featured.length) {
+            featured = artworks
+                .slice()
+                .sort((a, b) => (b.year || 0) - (a.year || 0));
+        }
 
         container.innerHTML = "";
-        featured.forEach(function (artwork) {
+        featured.slice(0, FEATURED_LIMIT).forEach(function (artwork) {
             container.appendChild(createArtworkCard(artwork, "index"));
+        });
+
+        if (!container.children.length) {
+            container.innerHTML =
+                '<p class="gallery-empty">Nowe prace pojawią się wkrótce.</p>';
+        }
+    }
+
+    async function renderAboutTags() {
+        const container = document.getElementById("about-tags");
+        if (!container) {
+            return;
+        }
+
+        const artworks = await getArtworks();
+        const categories = Array.from(
+            new Set(artworks.map((item) => item.category).filter(Boolean)),
+        );
+
+        container.innerHTML = "";
+        categories.forEach(function (category) {
+            const tag = document.createElement("a");
+            tag.className = "tag";
+            tag.href = "galeria.html?kategoria=" + encodeURIComponent(category);
+            tag.textContent = getCategoryLabel(category);
+            container.appendChild(tag);
         });
     }
 
-    function initContactEnhancements() {
-        const params = new URLSearchParams(window.location.search);
-        const selectedArtwork = params.get("art");
-        const wasSent = params.get("wyslano") === "1";
+    /* ── CONTACT ── */
 
+    function fillContactItem(id, text, href) {
+        const item = document.getElementById(id);
+        if (!item || !text) {
+            return;
+        }
+        const link = item.querySelector("a");
+        link.textContent = text;
+        link.href = href;
+        item.hidden = false;
+    }
+
+    async function initContactDetails() {
+        const form = document.getElementById("contact-form");
+        if (!form) {
+            return;
+        }
+
+        const site = await getSiteSettings();
+        const email = (site.email || "").trim();
+        const phone = (site.phone || "").trim();
+        const instagram = (site.instagram || "").trim().replace(/^@/, "");
+        const formTarget = (site.formId || "").trim() || email;
+
+        fillContactItem("contact-email", email, "mailto:" + email);
+        fillContactItem(
+            "contact-phone",
+            phone,
+            "tel:" + phone.replace(/[^\d+]/g, ""),
+        );
+        fillContactItem(
+            "contact-instagram",
+            instagram && "@" + instagram,
+            "https://instagram.com/" + encodeURIComponent(instagram),
+        );
+
+        if (formTarget) {
+            form.action =
+                "https://formsubmit.co/" +
+                encodeURIComponent(formTarget).replace("%40", "@");
+            document.getElementById("form-next").value =
+                window.location.origin +
+                window.location.pathname +
+                "?wyslano=1#kontakt";
+        } else {
+            document.getElementById("form-fields").disabled = true;
+            document.getElementById("form-disabled").hidden = false;
+        }
+    }
+
+    function prefillInquiry(artwork) {
         const hiddenArtwork = document.getElementById("artwork-hidden");
         const messageField = document.getElementById("message");
+
+        if (hiddenArtwork) {
+            hiddenArtwork.value = artwork.title + " (" + getArtworkMeta(artwork) + ")";
+        }
+
+        if (messageField && !messageField.value.trim()) {
+            messageField.value =
+                "Dzień dobry, interesuje mnie obraz „" +
+                artwork.title +
+                "”. Proszę o informację o dostępności i cenie.";
+        }
+    }
+
+    async function initContactEnhancements() {
+        const params = new URLSearchParams(window.location.search);
         const successMessage = document.getElementById("form-success");
 
-        if (selectedArtwork && hiddenArtwork) {
-            hiddenArtwork.value = selectedArtwork;
+        if (params.get("wyslano") === "1" && successMessage) {
+            successMessage.hidden = false;
         }
 
-        if (selectedArtwork && messageField && !messageField.value.trim()) {
-            messageField.value =
-                "Dzien dobry, interesuje mnie obraz: " +
-                selectedArtwork +
-                ". Prosze o informacje o dostepnosci i cenie.";
+        if (params.has("art")) {
+            await getArtworks();
+            const artwork = getArtworkById(params.get("art"));
+            if (artwork) {
+                prefillInquiry(artwork);
+            }
         }
 
-        if (wasSent && successMessage) {
-            successMessage.style.display = "block";
+        if (params.has("wyslano") || params.has("art")) {
+            history.replaceState(
+                null,
+                "",
+                window.location.pathname + window.location.hash,
+            );
         }
     }
 
@@ -569,9 +730,11 @@ const ArtSite = (function () {
         getArtworks,
         getCategoryLabel,
         initActiveSectionState,
+        initContactDetails,
         initContactEnhancements,
         initLightboxEvents,
         initMobileNav,
+        renderAboutTags,
         renderFeaturedGallery,
         updateFooterYear,
     };
@@ -584,15 +747,27 @@ document.addEventListener("DOMContentLoaded", async function () {
     ArtSite.initMobileNav();
     ArtSite.initLightboxEvents();
     ArtSite.initActiveSectionState();
-    ArtSite.initContactEnhancements();
+    ArtSite.initContactDetails();
 
     try {
-        await ArtSite.renderFeaturedGallery();
+        await Promise.all([
+            ArtSite.renderFeaturedGallery(),
+            ArtSite.renderAboutTags(),
+            ArtSite.initContactEnhancements(),
+        ]);
+
+        // Galeria doładowuje się asynchronicznie i przesuwa sekcje niżej
+        const target = window.location.hash
+            ? document.getElementById(window.location.hash.slice(1))
+            : null;
+        if (target && target.id !== "home") {
+            target.scrollIntoView();
+        }
     } catch (error) {
         const gallery = document.getElementById("featured-gallery");
         if (gallery) {
             gallery.innerHTML =
-                '<p class="gallery-empty">Nie mozna teraz wczytac galerii.</p>';
+                '<p class="gallery-empty">Nie można teraz wczytać galerii.</p>';
         }
         console.error(error);
     }

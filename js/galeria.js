@@ -7,40 +7,54 @@ document.addEventListener("DOMContentLoaded", async function () {
         return;
     }
 
-    let currentFilter = "all";
+    const params = new URLSearchParams(window.location.search);
+    let currentFilter = params.get("kategoria") || "all";
     let artworks = [];
 
-    function renderFilters() {
-        const categories = Array.from(
-            new Set(artworks.map((item) => item.category)),
-        );
+    function setFilter(filter) {
+        currentFilter = filter;
 
-        const allFilters = ["all"].concat(categories);
+        const url = new URL(window.location.href);
+        if (filter === "all") {
+            url.searchParams.delete("kategoria");
+        } else {
+            url.searchParams.set("kategoria", filter);
+        }
+        history.replaceState(null, "", url);
+
+        renderFilters();
+        renderGallery();
+    }
+
+    function renderFilters() {
+        const counts = new Map();
+        artworks.forEach(function (item) {
+            counts.set(item.category, (counts.get(item.category) || 0) + 1);
+        });
+
+        // Jedna kategoria = filtry nic nie dają
+        filterContainer.parentElement.hidden = counts.size < 2;
+
+        const allFilters = [["all", artworks.length]].concat(
+            Array.from(counts.entries()),
+        );
         filterContainer.innerHTML = "";
 
-        allFilters.forEach(function (filter) {
+        allFilters.forEach(function ([filter, count]) {
             const button = document.createElement("button");
+            const isActive = filter === currentFilter;
             button.type = "button";
-            button.className = "filter-btn";
-            button.dataset.filter = filter;
+            button.className = "filter-btn" + (isActive ? " active" : "");
+            button.setAttribute("aria-pressed", String(isActive));
             button.textContent =
-                filter === "all"
+                (filter === "all"
                     ? "Wszystkie"
-                    : window.ArtSite.getCategoryLabel(filter);
+                    : window.ArtSite.getCategoryLabel(filter)) +
+                " (" +
+                count +
+                ")";
 
-            if (filter === currentFilter) {
-                button.classList.add("active");
-                button.setAttribute("aria-pressed", "true");
-            } else {
-                button.setAttribute("aria-pressed", "false");
-            }
-
-            button.addEventListener("click", function () {
-                currentFilter = filter;
-                renderFilters();
-                renderGallery();
-            });
-
+            button.addEventListener("click", () => setFilter(filter));
             filterContainer.appendChild(button);
         });
     }
@@ -58,22 +72,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
 
         if (emptyMessage) {
-            if (visible.length === 0) {
-                emptyMessage.classList.remove("hidden");
-            } else {
-                emptyMessage.classList.add("hidden");
-            }
+            emptyMessage.hidden = visible.length > 0;
         }
     }
 
     try {
         artworks = await window.ArtSite.getArtworks();
+        if (!artworks.some((item) => item.category === currentFilter)) {
+            currentFilter = "all";
+        }
         renderFilters();
         renderGallery();
     } catch (error) {
         if (emptyMessage) {
-            emptyMessage.textContent = "Nie mozna teraz wczytac galerii.";
-            emptyMessage.classList.remove("hidden");
+            emptyMessage.textContent = "Nie można teraz wczytać galerii.";
+            emptyMessage.hidden = false;
         }
         console.error(error);
     }

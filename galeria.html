@@ -3,7 +3,19 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Galeria — Theodor Bucholz</title>
+        <title>Galeria — Theodor Buchholz</title>
+        <meta
+            name="description"
+            content="Pełna galeria prac Theodora Buchholza — filtruj według techniki i zapytaj o dostępność obrazu."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Galeria — Theodor Buchholz" />
+        <meta
+            property="og:description"
+            content="Wszystkie prace — różne techniki, różne światy."
+        />
+        <meta property="og:image" content="img/prace/pejzaz-jesienny.jpg" />
+        <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -14,10 +26,12 @@
         <link rel="stylesheet" href="css/galeria.css" />
     </head>
     <body>
+        <a class="skip-link" href="#gallery-container">Przejdź do galerii</a>
+
         <!-- NAV -->
         <nav>
             <div class="inner">
-                <a href="index.html#" class="nav-name">Theodor Buchholz</a>
+                <a href="index.html" class="nav-name">Theodor Buchholz</a>
                 <button
                     class="nav-toggle"
                     type="button"
@@ -30,115 +44,60 @@
                     <span></span>
                 </button>
                 <ul class="nav-links" id="primary-nav">
-                    <li><a href="galeria.html">Galeria</a></li>
+                    <li>
+                        <a href="galeria.html" aria-current="page">Galeria</a>
+                    </li>
                     <li><a href="index.html#o-artyscie">O artyście</a></li>
                     <li><a href="index.html#kontakt">Kontakt</a></li>
                 </ul>
             </div>
         </nav>
 
-        <!-- PAGE HEADER -->
-        <div class="page-header">
-            <div class="inner">
-                <p class="hero-eyebrow">Portfolio · Malarstwo</p>
-                <h1 class="page-title">Galeria <em>prac</em></h1>
-                <p class="page-desc">
-                    Wszystkie prace — różne techniki, różne światy. Kliknij
-                    obraz, aby zobaczyć go w pełnym rozmiarze.
+        <main>
+            <!-- PAGE HEADER -->
+            <div class="page-header">
+                <div class="inner">
+                    <p class="hero-eyebrow">Portfolio · Malarstwo</p>
+                    <h1 class="page-title">Galeria <em>prac</em></h1>
+                    <p class="page-desc">
+                        Wszystkie prace — różne techniki, różne światy. Kliknij
+                        obraz, aby zobaczyć go w pełnym rozmiarze i zapytać o
+                        dostępność.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FILTERS -->
+            <div class="filter-bar">
+                <div
+                    class="inner filter-inner"
+                    id="gallery-filters"
+                    role="group"
+                    aria-label="Filtruj według techniki"
+                ></div>
+            </div>
+
+            <!-- GALLERY GRID -->
+            <div class="full-gallery-wrap">
+                <div
+                    class="full-gallery inner"
+                    id="gallery-container"
+                    aria-live="polite"
+                ></div>
+
+                <p class="gallery-empty" id="gallery-empty" hidden>
+                    Brak prac w tej kategorii.
                 </p>
             </div>
-        </div>
-
-        <!-- FILTERS -->
-        <div class="filter-bar">
-            <div
-                class="inner filter-inner"
-                id="gallery-filters"
-                aria-label="Filtry galerii"
-            ></div>
-        </div>
-
-        <!-- GALLERY GRID -->
-        <div class="full-gallery-wrap">
-            <main
-                class="full-gallery inner"
-                id="gallery-container"
-                aria-live="polite"
-            ></main>
-        </div>
-
-        <!-- EMPTY STATE -->
-        <p class="gallery-empty hidden" id="gallery-empty">
-            Brak prac w tej kategorii.
-        </p>
+        </main>
 
         <!-- FOOTER -->
         <footer>
             <div class="inner">
-                <span>© <span id="footer-year"></span> Theodor Bucholz</span>
+                <span>© <span id="footer-year"></span> Theodor Buchholz</span>
                 <a href="index.html">← Wróć na stronę główną</a>
             </div>
         </footer>
-
-        <!-- LIGHTBOX -->
-        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-            <button class="lightbox-close" data-lightbox-close type="button">
-                Zamknij ×
-            </button>
-            <div class="lightbox-lens-controls" aria-label="Rozmiar lupy">
-                <button
-                    class="lightbox-lens-btn"
-                    data-lightbox-lens-smaller
-                    type="button"
-                    aria-label="Zmniejsz obszar lupy"
-                >
-                    Lupa -
-                </button>
-                <button
-                    class="lightbox-lens-btn"
-                    data-lightbox-lens-larger
-                    type="button"
-                    aria-label="Powieksz obszar lupy"
-                >
-                    Lupa +
-                </button>
-            </div>
-            <button
-                class="lightbox-nav lightbox-prev"
-                data-lightbox-prev
-                type="button"
-                aria-label="Poprzedni obraz"
-            >
-                ←
-            </button>
-            <button
-                class="lightbox-nav lightbox-next"
-                data-lightbox-next
-                type="button"
-                aria-label="Następny obraz"
-            >
-                →
-            </button>
-            <div class="lightbox-placeholder" id="lightbox-placeholder">
-                <svg
-                    width="48"
-                    height="48"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#C9B89A"
-                    stroke-width="1"
-                >
-                    <rect x="3" y="3" width="18" height="18" rx="1" />
-                    <path d="M3 9l4-4 4 4 4-6 4 6" />
-                    <circle cx="8.5" cy="13.5" r="1.5" />
-                </svg>
-            </div>
-            <img class="lightbox-img hidden" id="lightbox-img" alt="" />
-            <div class="lightbox-caption">
-                <p class="lc-name" id="lightbox-name"></p>
-                <p class="lc-meta" id="lightbox-meta"></p>
-            </div>
-        </div>
 
         <script src="js/main.js" defer></script>
         <script src="js/galeria.js" defer></script>

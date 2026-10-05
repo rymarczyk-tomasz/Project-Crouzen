@@ -4,6 +4,18 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Theodor Buchholz — Malarstwo</title>
+        <meta
+            name="description"
+            content="Portfolio malarza Theodora Buchholza — pastele, rysunek i techniki mieszane. Zobacz galerię prac i zapytaj o dostępność obrazów."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Theodor Buchholz — Malarstwo" />
+        <meta
+            property="og:description"
+            content="Galeria prac: pastele, rysunek i techniki mieszane."
+        />
+        <meta property="og:image" content="img/prace/pejzaz-jesienny.jpg" />
+        <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -13,10 +25,12 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
+        <a class="skip-link" href="#galeria">Przejdź do treści</a>
+
         <!-- NAV -->
         <nav>
             <div class="inner">
-                <a href="#" class="nav-name">Theodor Buchholz</a>
+                <a href="#home" class="nav-name">Theodor Buchholz</a>
                 <button
                     class="nav-toggle"
                     type="button"
@@ -38,192 +52,202 @@
             </div>
         </nav>
 
-        <!-- HERO -->
-        <section class="hero" id="home">
-            <div class="inner">
-                <div class="hero-bg-text" aria-hidden="true">Malarstwo</div>
-                <p class="hero-eyebrow">Portfolio · Malarstwo</p>
-                <h1 class="hero-title">Kolor<br />jako <em>język</em></h1>
-                <p class="hero-desc">
-                    Różnorodne techniki, jeden głos. Prace olejne, akrylowe i
-                    akwarele — każda z własną historią, każda z żywą barwą.
-                </p>
-                <a href="#galeria" class="hero-scroll">
-                    <span class="hero-scroll-line"></span>
-                    Przejdź do galerii
-                </a>
-            </div>
-        </section>
-
-        <!-- GALLERY -->
-        <section id="galeria">
-            <div class="inner">
-                <div class="section-header">
-                    <span class="section-num">01</span>
-                    <h2 class="section-title">Galeria prac</h2>
-                    <span class="section-rule"></span>
-                </div>
-                <div
-                    class="gallery-grid"
-                    id="featured-gallery"
-                    aria-live="polite"
-                ></div>
-
-                <div class="gallery-footer">
-                    <a href="galeria.html" class="btn-gallery">
-                        Zobacz całą galerię
-                        <span class="btn-gallery-arrow">→</span>
+        <main>
+            <!-- HERO -->
+            <section class="hero" id="home">
+                <div class="inner">
+                    <div class="hero-bg-text" aria-hidden="true">Malarstwo</div>
+                    <p class="hero-eyebrow">Portfolio · Malarstwo</p>
+                    <h1 class="hero-title">Kolor<br />jako <em>język</em></h1>
+                    <p class="hero-desc">
+                        Różnorodne techniki, jeden głos. Każda praca z własną
+                        historią, każda z żywą barwą.
+                    </p>
+                    <a href="#galeria" class="hero-scroll">
+                        <span class="hero-scroll-line"></span>
+                        Przejdź do galerii
                     </a>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ABOUT -->
-        <section id="o-artyscie">
-            <div class="inner">
-                <div class="section-header">
-                    <span class="section-num">02</span>
-                    <h2 class="section-title">O artyście</h2>
-                    <span class="section-rule"></span>
-                </div>
-                <div class="about-grid">
-                    <div class="about-photo">
-                        <img src="img/Korzen.jpg" alt="Zdjęcie artysty" />
+            <!-- GALLERY -->
+            <section id="galeria">
+                <div class="inner">
+                    <div class="section-header">
+                        <span class="section-num">01</span>
+                        <h2 class="section-title">Wybrane prace</h2>
+                        <span class="section-rule"></span>
                     </div>
-                    <div class="about-content">
-                        <h2 class="about-name">
-                            Theodor<br /><em>Buchholz</em>
-                        </h2>
-                        <p class="about-bio">
-                            Malarz o szerokich zainteresowaniach artystycznych —
-                            swobodnie porusza się między realizmem a abstrakcją,
-                            eksplorując granice formy i koloru. W swojej pracy
-                            łączy tradycyjne techniki olejne z eksperymentalnym
-                            podejściem do materii i gestu.
-                        </p>
-                        <p class="about-bio">
-                            Tworzy obrazy, które są zaproszeniem do zatrzymania
-                            się — każda praca niesie ze sobą nastrój, chwilę,
-                            historię. Inspirację czerpie z natury, ciszy i
-                            codziennych obserwacji, które przetwarza na język
-                            barwy i faktury.
-                        </p>
-                        <div class="about-tags">
-                            <span class="tag">Olej na płótnie</span>
-                            <span class="tag">Akwarela</span>
-                            <span class="tag">Akryl</span>
-                            <span class="tag">Pastel</span>
-                            <span class="tag">Technika mieszana</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    <div
+                        class="gallery-grid"
+                        id="featured-gallery"
+                        aria-live="polite"
+                    ></div>
 
-        <!-- CONTACT -->
-        <section id="kontakt">
-            <div class="inner">
-                <div class="section-header">
-                    <span class="section-num">03</span>
-                    <h2 class="section-title">Kontakt</h2>
-                    <span class="section-rule"></span>
+                    <div class="gallery-footer">
+                        <a href="galeria.html" class="btn-gallery">
+                            Zobacz całą galerię
+                            <span class="btn-gallery-arrow" aria-hidden="true"
+                                >→</span
+                            >
+                        </a>
+                    </div>
                 </div>
-                <div class="contact-grid">
-                    <div>
-                        <p class="contact-intro">
-                            Masz pytanie o pracę?<br />Chętnie odpiszę.
-                        </p>
-                        <div class="contact-item">
-                            <span class="contact-label">E-mail</span>
-                            <span class="contact-value"
-                                ><a href="mailto:theodor@example.com"
-                                    >theodor@example.com</a
-                                ></span
-                            >
+            </section>
+
+            <!-- ABOUT -->
+            <section id="o-artyscie">
+                <div class="inner">
+                    <div class="section-header">
+                        <span class="section-num">02</span>
+                        <h2 class="section-title">O artyście</h2>
+                        <span class="section-rule"></span>
+                    </div>
+                    <div class="about-grid">
+                        <div class="about-photo">
+                            <img
+                                src="img/artysta.jpg"
+                                alt="Theodor Buchholz"
+                                loading="lazy"
+                            />
                         </div>
-                        <div class="contact-item">
-                            <span class="contact-label">Telefon</span>
-                            <span class="contact-value">+48 000 000 000</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">Instagram</span>
-                            <span class="contact-value"
-                                ><a
-                                    href="https://instagram.com"
-                                    target="_blank"
-                                    rel="noopener"
-                                    >@theodorbuchholz</a
-                                ></span
-                            >
+                        <div class="about-content">
+                            <h3 class="about-name">
+                                Theodor<br /><em>Buchholz</em>
+                            </h3>
+                            <p class="about-bio">
+                                Malarz o szerokich zainteresowaniach
+                                artystycznych — swobodnie porusza się między
+                                realizmem a abstrakcją, eksplorując granice
+                                formy i koloru. W swojej pracy łączy tradycyjne
+                                techniki z eksperymentalnym podejściem do
+                                materii i gestu.
+                            </p>
+                            <p class="about-bio">
+                                Tworzy obrazy, które są zaproszeniem do
+                                zatrzymania się — każda praca niesie ze sobą
+                                nastrój, chwilę, historię. Inspirację czerpie z
+                                natury, ciszy i codziennych obserwacji, które
+                                przetwarza na język barwy i faktury.
+                            </p>
+                            <div class="about-tags" id="about-tags"></div>
                         </div>
                     </div>
-                    <form
-                        class="contact-form"
-                        action="https://formsubmit.co/theodor@example.com"
-                        method="POST"
-                    >
-                        <input
-                            type="hidden"
-                            name="_subject"
-                            value="Nowa wiadomość ze strony portfolio"
-                        />
-                        <input type="hidden" name="_captcha" value="false" />
-                        <input type="hidden" name="_template" value="table" />
-                        <input
-                            type="hidden"
-                            name="_autoresponse"
-                            value="Dziękuję za wiadomość. Odpowiem najszybciej, jak to możliwe."
-                        />
-                        <input
-                            type="hidden"
-                            name="_next"
-                            value="index.html?wyslano=1#kontakt"
-                        />
-                        <input
-                            type="hidden"
-                            name="artwork"
-                            id="artwork-hidden"
-                        />
-                        <div class="field">
-                            <label for="name">Imię i nazwisko</label>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section id="kontakt">
+                <div class="inner">
+                    <div class="section-header">
+                        <span class="section-num">03</span>
+                        <h2 class="section-title">Kontakt</h2>
+                        <span class="section-rule"></span>
+                    </div>
+                    <div class="contact-grid">
+                        <div>
+                            <p class="contact-intro">
+                                Masz pytanie o pracę?<br />Chętnie odpiszę.
+                            </p>
+                            <div class="contact-item" id="contact-email" hidden>
+                                <span class="contact-label">E-mail</span>
+                                <span class="contact-value"><a></a></span>
+                            </div>
+                            <div class="contact-item" id="contact-phone" hidden>
+                                <span class="contact-label">Telefon</span>
+                                <span class="contact-value"><a></a></span>
+                            </div>
+                            <div
+                                class="contact-item"
+                                id="contact-instagram"
+                                hidden
+                            >
+                                <span class="contact-label">Instagram</span>
+                                <span class="contact-value"
+                                    ><a target="_blank" rel="noopener"></a
+                                ></span>
+                            </div>
+                        </div>
+                        <form class="contact-form" id="contact-form" method="POST">
+                            <input
+                                type="hidden"
+                                name="_subject"
+                                value="Nowa wiadomość ze strony portfolio"
+                            />
+                            <input type="hidden" name="_captcha" value="false" />
+                            <input type="hidden" name="_template" value="table" />
+                            <input
+                                type="hidden"
+                                name="_autoresponse"
+                                value="Dziękuję za wiadomość. Odpowiem najszybciej, jak to możliwe."
+                            />
+                            <input type="hidden" name="_next" id="form-next" />
+                            <input
+                                type="hidden"
+                                name="obraz"
+                                id="artwork-hidden"
+                            />
                             <input
                                 type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Jan Kowalski"
-                                required
+                                name="_honey"
+                                class="form-honey"
+                                tabindex="-1"
+                                autocomplete="off"
+                                aria-hidden="true"
                             />
-                        </div>
-                        <div class="field">
-                            <label for="email">Adres e-mail</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="jan@example.com"
-                                required
-                            />
-                        </div>
-                        <div class="field">
-                            <label for="message">Wiadomość</label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                rows="5"
-                                placeholder="Czym mogę się z Tobą podzielić?"
-                                required
-                            ></textarea>
-                        </div>
-                        <button type="submit" class="btn-send">
-                            Wyślij wiadomość
-                        </button>
-                        <p id="form-success" class="form-success">
-                            Wiadomość wysłana — dziękuję za kontakt.
-                        </p>
-                    </form>
+                            <fieldset class="form-fields" id="form-fields">
+                                <div class="field">
+                                    <label for="name">Imię i nazwisko</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        autocomplete="name"
+                                        placeholder="Jan Kowalski"
+                                        required
+                                    />
+                                </div>
+                                <div class="field">
+                                    <label for="email">Adres e-mail</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        autocomplete="email"
+                                        placeholder="jan@example.com"
+                                        required
+                                    />
+                                </div>
+                                <div class="field">
+                                    <label for="message">Wiadomość</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        rows="5"
+                                        placeholder="W czym mogę pomóc?"
+                                        required
+                                    ></textarea>
+                                </div>
+                                <button type="submit" class="btn-send">
+                                    Wyślij wiadomość
+                                </button>
+                            </fieldset>
+                            <p class="form-notice" id="form-disabled" hidden>
+                                Formularz kontaktowy będzie dostępny wkrótce.
+                            </p>
+                            <p
+                                id="form-success"
+                                class="form-notice"
+                                role="status"
+                                hidden
+                            >
+                                Wiadomość wysłana — dziękuję za kontakt.
+                            </p>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
         <!-- FOOTER -->
         <footer>
@@ -232,66 +256,6 @@
                 <a href="#home">Powrót na górę ↑</a>
             </div>
         </footer>
-
-        <!-- LIGHTBOX -->
-        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-            <button class="lightbox-close" data-lightbox-close type="button">
-                Zamknij ×
-            </button>
-            <div class="lightbox-lens-controls" aria-label="Rozmiar lupy">
-                <button
-                    class="lightbox-lens-btn"
-                    data-lightbox-lens-smaller
-                    type="button"
-                    aria-label="Zmniejsz obszar lupy"
-                >
-                    Lupa -
-                </button>
-                <button
-                    class="lightbox-lens-btn"
-                    data-lightbox-lens-larger
-                    type="button"
-                    aria-label="Powieksz obszar lupy"
-                >
-                    Lupa +
-                </button>
-            </div>
-            <button
-                class="lightbox-nav lightbox-prev"
-                data-lightbox-prev
-                type="button"
-                aria-label="Poprzedni obraz"
-            >
-                ←
-            </button>
-            <button
-                class="lightbox-nav lightbox-next"
-                data-lightbox-next
-                type="button"
-                aria-label="Następny obraz"
-            >
-                →
-            </button>
-            <div class="lightbox-placeholder" id="lightbox-placeholder">
-                <svg
-                    width="48"
-                    height="48"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#C9B89A"
-                    stroke-width="1"
-                >
-                    <rect x="3" y="3" width="18" height="18" rx="1" />
-                    <path d="M3 9l4-4 4 4 4-6 4 6" />
-                    <circle cx="8.5" cy="13.5" r="1.5" />
-                </svg>
-            </div>
-            <img class="lightbox-img hidden" id="lightbox-img" alt="" />
-            <div class="lightbox-caption">
-                <p class="lc-name" id="lightbox-name"></p>
-                <p class="lc-meta" id="lightbox-meta"></p>
-            </div>
-        </div>
 
         <script src="js/main.js" defer></script>
     </body>

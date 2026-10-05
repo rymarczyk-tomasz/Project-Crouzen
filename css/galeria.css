@@ -1,9 +1,5 @@
 /* Gallery page */
 
-.nav-active {
-    color: var(--umber) !important;
-}
-
 .page-header {
     padding: 140px 48px 56px;
     background: var(--cream);
@@ -79,13 +75,13 @@
 
 .full-gallery-wrap {
     background: var(--white);
+    padding: 0 48px;
 }
 
 .full-gallery {
     columns: 3;
     column-gap: 20px;
-    padding: 40px 48px 80px;
-    background: transparent;
+    padding: 40px 0 80px;
 }
 
 .fg-item {
@@ -94,13 +90,10 @@
     display: block;
 }
 
-.fg-item.hidden {
-    display: none;
-}
-
 .fg-frame {
     width: 100%;
     overflow: hidden;
+    position: relative;
     border: 1px solid rgba(122, 92, 62, 0.12);
     background: var(--parch);
 }
@@ -114,17 +107,6 @@
 
 .fg-item:hover .fg-frame img {
     transform: scale(1.04);
-}
-
-.fg-placeholder {
-    aspect-ratio: 4/3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.fg-placeholder .painting-placeholder {
-    color: #f2ebe0;
 }
 
 .fg-caption {
@@ -143,7 +125,7 @@
 
 .fg-name {
     font-family: "Cormorant Garamond", serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--umber);
 }
@@ -153,17 +135,6 @@
     font-weight: 400;
     color: var(--sand);
     letter-spacing: 0.04em;
-}
-
-.gallery-empty {
-    text-align: center;
-    padding: 56px 24px 72px;
-    font-size: 14px;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #6b5040;
-    background: var(--white);
 }
 
 @media (max-width: 1100px) {
@@ -182,16 +153,28 @@
         padding: 16px 24px;
     }
 
+    .full-gallery-wrap {
+        padding: 0 24px;
+    }
+
     .full-gallery {
         columns: 2;
-        padding: 28px 24px 60px;
+        padding: 28px 0 60px;
     }
 }
 
 @media (max-width: 600px) {
+    .page-header {
+        padding: 110px 16px 36px;
+    }
+
+    .full-gallery-wrap {
+        padding: 0 16px;
+    }
+
     .full-gallery {
         columns: 1;
-        padding: 20px 16px 48px;
+        padding: 20px 0 48px;
     }
 
     .filter-bar {
