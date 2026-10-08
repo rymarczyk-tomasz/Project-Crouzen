@@ -1,4 +1,4 @@
-# Theodor Buchholz — portfolio
+# Theodor Bucholz — portfolio
 
 Statyczna strona (HTML/CSS/JS, bez kompilacji). Prace i dane kontaktowe są w plikach JSON,
 które można edytować ręcznie albo przez panel pod adresem **`/admin/`**.
