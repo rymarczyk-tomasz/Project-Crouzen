@@ -4,8 +4,8 @@ Statyczna strona (HTML/CSS/JS, bez kompilacji). Prace i dane kontaktowe są w pl
 które można edytować ręcznie albo przez panel pod adresem **`/admin/`**.
 
 ```text
-index.html          strona główna (wybrane prace, o artyście, kontakt)
-galeria.html        pełna galeria z filtrami
+index.html          strona (prace z filtrami i podglądem, o artyście, kontakt)
+galeria.html        przekierowanie na index.html#prace (stare linki)
 data/artworks.json  lista prac
 data/site.json      e-mail, telefon, Instagram
 img/prace/          zdjęcia prac
@@ -47,7 +47,7 @@ Utworzenie tokenu najwygodniej zrobić raz na komputerze.
 
 - **Prace → Lista prac** — dodać pracę (zdjęcie jest automatycznie zmniejszane i zapisywane
   jako WebP), zmienić opis, cenę, dostępność, usunąć pracę, przeciągnąć, aby zmienić kolejność.
-  - *Wyróżniona* — pokazuje się na stronie głównej (maks. 6).
+  - *Wyróżniona* — obecnie nieużywane (galeria pokazuje wszystkie opublikowane prace).
   - *Pokaż na stronie* — wyłącz, żeby ukryć pracę bez usuwania.
   - Prace **bez zdjęcia nie są wyświetlane**.
 - **Ustawienia → Dane kontaktowe** — e-mail, telefon, Instagram. Puste pola się nie wyświetlają.
@@ -72,7 +72,7 @@ Formularz jest wyłączony, dopóki w *Dane kontaktowe* nie ma adresu e-mail.
 ## Adres strony i własna domena
 
 Strona: <https://rymarczyk-tomasz.github.io/Project-Crouzen/> (GitHub Pages z gałęzi `dev`).
-Po podpięciu własnej domeny podmień ten adres w `og:image` (`index.html`, `galeria.html`)
+Po podpięciu własnej domeny podmień ten adres w `og:image`, `canonical` i JSON-LD (`index.html`) oraz w `galeria.html`
 oraz w `site_url` / `display_url` w `admin/config.yml`.
 
 ## Do zrobienia
