@@ -88,10 +88,10 @@ collections:
                 hint: "Np. 2 400 zł. Puste = „cena na zapytanie”. Widoczna tylko dla dostępnych prac."
               - { name: description, label: Opis, widget: text, required: false }
               - name: featured
-                label: Wyróżniona na stronie głównej
+                label: Wyróżniona (nieużywane)
                 widget: boolean
                 default: false
-                hint: "Strona główna pokazuje do 6 wyróżnionych prac."
+                hint: "Obecnie bez znaczenia — galeria pokazuje wszystkie opublikowane prace."
               - { name: published, label: Pokaż na stronie, widget: boolean, default: true }
 
   - name: ustawienia
